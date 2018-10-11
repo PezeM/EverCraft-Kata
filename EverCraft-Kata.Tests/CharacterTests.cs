@@ -33,5 +33,17 @@ namespace EverCraft_Kata.Tests
             newCharacter.SetAlignment(Alignment.Good);
             Assert.AreEqual(Alignment.Good, newCharacter.Alignment);
         }
+
+        [TestMethod]
+        public void CharacterHasArmorClass()
+        {
+            Assert.AreEqual(10, newCharacter.ArmorClass);
+        }
+
+        [TestMethod]
+        public void CharacterHasHitPoints()
+        {
+            Assert.AreEqual(5, newCharacter.HitPoints);
+        }
     }
 }

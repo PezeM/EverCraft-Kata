@@ -10,6 +10,8 @@ namespace EverCraft_Kata
     {
         public string Name { get; private set; }
         public Alignment Alignment { get; private set; }
+        public int ArmorClass { get; private set; } = 10;
+        public int HitPoints { get; private set; } = 5;
 
         public Character(string name)
         {
