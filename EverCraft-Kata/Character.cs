@@ -9,6 +9,7 @@ namespace EverCraft_Kata
     public class Character
     {
         public string Name { get; private set; }
+        public Alignment Alignment { get; private set; }
 
         public Character(string name)
         {
@@ -19,6 +20,11 @@ namespace EverCraft_Kata
         {
             if (newName != string.Empty)
                 Name = newName;
+        }
+
+        public void SetAlignment(Alignment newAlignment)
+        {
+            Alignment = newAlignment;
         }
     }
 }

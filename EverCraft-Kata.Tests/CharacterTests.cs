@@ -20,5 +20,18 @@ namespace EverCraft_Kata.Tests
             newCharacter.ChangeName("John");
             Assert.AreEqual("John", newCharacter.Name);
         }
+
+        [TestMethod]
+        public void CharacterHasAnAlignment()
+        {
+            Assert.AreEqual(Alignment.Neutral, newCharacter.Alignment);
+        }
+
+        [TestMethod]
+        public void CharacterCanChangeAlignment()
+        {
+            newCharacter.SetAlignment(Alignment.Good);
+            Assert.AreEqual(Alignment.Good, newCharacter.Alignment);
+        }
     }
 }
