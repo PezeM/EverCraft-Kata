@@ -45,5 +45,14 @@ namespace EverCraft_Kata.Tests
         {
             Assert.AreEqual(5, newCharacter.HitPoints);
         }
+
+        [TestMethod]
+        public void CharacterCanAttack()
+        {
+            var enemy = new Character("Jake");
+            var damage = 10;
+            Assert.IsTrue(newCharacter.Attack(enemy, damage));
+            Assert.IsFalse(newCharacter.Attack(enemy, --damage));
+        }
     }
 }

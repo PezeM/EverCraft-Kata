@@ -28,5 +28,12 @@ namespace EverCraft_Kata
         {
             Alignment = newAlignment;
         }
+
+        public bool Attack(Character enemy, int hitRoll)
+        {
+            var canHit = hitRoll >= enemy.ArmorClass;
+
+            return canHit;
+        }
     }
 }
