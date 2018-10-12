@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EverCraft_Kata.Tests
 {
@@ -47,12 +46,39 @@ namespace EverCraft_Kata.Tests
         }
 
         [TestMethod]
+        public void CharacterCanDie()
+        {
+            // Character will die if the hitpoints are lower than 1
+            var enemy = new Character("Jake");
+            enemy.TakeDamage(5);
+
+            Assert.IsTrue(enemy.IsDead);
+        }
+
+        [TestMethod]
         public void CharacterCanAttack()
         {
             var enemy = new Character("Jake");
             var damage = 10;
             Assert.IsTrue(newCharacter.Attack(enemy, damage));
             Assert.IsFalse(newCharacter.Attack(enemy, --damage));
+        }
+
+        [TestMethod]
+        public void CharacterCanBeDamaged()
+        {
+            var enemy = new Character("Jake");
+            newCharacter.Attack(enemy, 10);
+            Assert.AreEqual(4, enemy.HitPoints);
+        }
+
+        [TestMethod]
+        public void CharacterTakesDoubledDamageIfCrit()
+        {
+            var enemy = new Character("Jake");
+            var expectedHealth = enemy.HitPoints - 2;
+            newCharacter.Attack(enemy, 20);
+            Assert.AreEqual(expectedHealth, enemy.HitPoints);
         }
     }
 }
