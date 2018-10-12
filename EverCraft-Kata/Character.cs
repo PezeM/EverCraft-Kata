@@ -14,9 +14,23 @@ namespace EverCraft_Kata
         public int HitPoints { get; private set; } = 5;
         public bool IsDead { get { return HitPoints <= 0; } }
 
+        // Abilities
+        public Ability Strength { get; private set; }
+        public Ability Dexterity { get; private set; }
+        public Ability Constitution { get; private set; }
+        public Ability Wisdom { get; private set; }
+        public Ability Intelligence { get; private set; }
+        public Ability Charisma { get; private set; }
+
         public Character(string name)
         {
             Name = name;
+            Strength = new Ability(10);
+            Dexterity = new Ability(10);
+            Constitution = new Ability(10);
+            Wisdom = new Ability(10);
+            Intelligence = new Ability(10);
+            Charisma = new Ability(10);
         }
 
         public void ChangeName(string newName)

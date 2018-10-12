@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace EverCraft_Kata.Tests
 {
@@ -79,6 +80,25 @@ namespace EverCraft_Kata.Tests
             var expectedHealth = enemy.HitPoints - 2;
             newCharacter.Attack(enemy, 20);
             Assert.AreEqual(expectedHealth, enemy.HitPoints);
+        }
+
+        [TestMethod]
+        public void CharacterHasAbilities()
+        {
+            var abilities = new Ability[]
+            {
+                newCharacter.Strength,
+                newCharacter.Wisdom,
+                newCharacter.Intelligence,
+                newCharacter.Dexterity,
+                newCharacter.Constitution,
+                newCharacter.Charisma
+            };
+
+            foreach (var ability in abilities)
+            {
+                Assert.IsNotNull(ability);
+            }
         }
     }
 }
