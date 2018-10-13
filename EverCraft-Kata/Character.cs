@@ -7,6 +7,8 @@ namespace EverCraft_Kata
         private const int BASE_ARMOR_CLASS = 10;
         private const int BASE_HIT_POINTS = 5;
 
+        private int experience = 0;
+
         public string Name { get; private set; }
         public Alignment Alignment { get; private set; }
 
@@ -76,7 +78,10 @@ namespace EverCraft_Kata
 
             // Only deal damage if its higher than 0 
             if (damage > 0)
+            {
                 enemy.TakeDamage(damage);
+                experience += 10;
+            }
 
             return true;
         }
