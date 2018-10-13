@@ -6,11 +6,13 @@ namespace EverCraft_Kata
     {
         private const int BASE_ARMOR_CLASS = 10;
         private const int BASE_HIT_POINTS = 5;
+        private const int BASE_LEVEL = 1;
 
         private int experience = 0;
 
         public string Name { get; private set; }
         public Alignment Alignment { get; private set; }
+        public int Level { get; private set; }
 
         public int ArmorClass { get; private set; }
         public int HitPoints { get; private set; }
@@ -30,6 +32,7 @@ namespace EverCraft_Kata
             Name = name;
             ArmorClass = 10;
             HitPoints = 5;
+            Level = BASE_LEVEL;
 
             Strength = new Ability(10);
             Dexterity = new Ability(10);
@@ -46,8 +49,17 @@ namespace EverCraft_Kata
             // Dexterity - modifier to armor points
             ArmorClass = BASE_ARMOR_CLASS + Dexterity.Modifier;
 
-            // Constitution - modifier to hit points
-            HitPoints = BASE_HIT_POINTS + Constitution.Modifier > 0 ? BASE_HIT_POINTS + Constitution.Modifier : 1;
+            RecalculateHitPoints();
+        }
+
+        private void RecalculateHitPoints()
+        {
+            HitPoints = Level * HitPointsPerLevel();
+        }
+
+        private int HitPointsPerLevel()
+        {
+            return Math.Max(1, BASE_HIT_POINTS + Constitution.Modifier);
         }
 
         public void ChangeName(string newName)
@@ -63,9 +75,12 @@ namespace EverCraft_Kata
 
         public bool Attack(Character enemy, int attackRoll)
         {
+            // For every even level achieved, add one point to attack roll
+            var totallAttackRoll = Level % 2 == 0 ? attackRoll + (Level / 2) : attackRoll;
+
             // If its critical multiply modifier times 2, otherwise just add strength modifier
-            var modifier = IsCrit(attackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
-            var canHit = IsCrit(attackRoll) || (attackRoll + modifier) >= enemy.ArmorClass;
+            var modifier = IsCrit(totallAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
+            var canHit = IsCrit(totallAttackRoll) || (totallAttackRoll + modifier) >= enemy.ArmorClass;
 
             // If the potential attack if lower than enemy's armor don't attack
             if (!canHit)
@@ -73,17 +88,31 @@ namespace EverCraft_Kata
 
             // Calculate attack damage
             int damage = 1 + modifier;
-            if (IsCrit(attackRoll))
+            if (IsCrit(totallAttackRoll))
                 damage *= 2;
 
             // Only deal damage if its higher than 0 
             if (damage > 0)
             {
                 enemy.TakeDamage(damage);
-                experience += 10;
+                AddExperience(10);
             }
 
             return true;
+        }
+
+        private void AddExperience(int exp)
+        {
+            experience += exp;
+            RecalculateLevel();
+        }
+
+        private void RecalculateLevel()
+        {
+            var startingLevel = Level;
+            Level = BASE_LEVEL + (experience / 1000);
+
+            HitPoints += (Level - startingLevel) * HitPointsPerLevel();
         }
 
         public void TakeDamage(int damage)
@@ -93,7 +122,7 @@ namespace EverCraft_Kata
 
         private bool IsCrit(int hitRoll)
         {
-            return hitRoll == 20;
+            return hitRoll >= 20;
         }
 
         public void ChangeScoreTo(Ability ability, int score)

@@ -47,6 +47,36 @@ namespace EverCraft_Kata.Tests
         }
 
         [TestMethod]
+        public void CharacterStartsAtLevelOne()
+        {
+            Assert.AreEqual(1, newCharacter.Level);
+        }
+
+        [TestMethod]
+        public void CharacterGainsALevelAfterGivenExperience()
+        {
+            var enemy = new Character("Jake");
+            for (int i = 0; i < 101; i++)
+            {
+                newCharacter.Attack(enemy, 10);
+            }
+
+            Assert.AreEqual(2, newCharacter.Level);
+        }
+
+        [TestMethod]
+        public void CharacterIncreasesHitPointsWithLevelUp()
+        {
+            var enemy = new Character("Jake");
+            for (int i = 0; i < 101; i++)
+            {
+                newCharacter.Attack(enemy, 10);
+            }
+
+            Assert.AreEqual(10, newCharacter.HitPoints);
+        }
+
+        [TestMethod]
         public void CharacterCanDie()
         {
             // Character will die if the hitpoints are lower than 1

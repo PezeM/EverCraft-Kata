@@ -51,5 +51,20 @@ namespace EverCraft_Kata.Tests
             newCharacter.Attack(enemy, 20);
             Assert.AreEqual(expectedHealth, enemy.HitPoints);
         }
+
+        [TestMethod]
+        public void CharacterRollMoreForEveryEvenLevelAchieved()
+        {
+            var enemy = new Character("Jake");
+            for (int i = 0; i < 101; i++)
+            {
+                newCharacter.Attack(enemy, 10);
+            }
+
+            var newEnemy = new Character("1");
+            // Should be crit now
+            newCharacter.Attack(newEnemy, 19);
+            Assert.AreEqual(3, newEnemy.HitPoints);
+        }
     }
 }
