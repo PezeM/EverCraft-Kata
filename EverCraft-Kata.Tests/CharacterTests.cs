@@ -57,32 +57,6 @@ namespace EverCraft_Kata.Tests
         }
 
         [TestMethod]
-        public void CharacterCanAttack()
-        {
-            var enemy = new Character("Jake");
-            var damage = 10;
-            Assert.IsTrue(newCharacter.Attack(enemy, damage));
-            Assert.IsFalse(newCharacter.Attack(enemy, --damage));
-        }
-
-        [TestMethod]
-        public void CharacterCanBeDamaged()
-        {
-            var enemy = new Character("Jake");
-            newCharacter.Attack(enemy, 10);
-            Assert.AreEqual(4, enemy.HitPoints);
-        }
-
-        [TestMethod]
-        public void CharacterTakesDoubledDamageIfCrit()
-        {
-            var enemy = new Character("Jake");
-            var expectedHealth = enemy.HitPoints - 2;
-            newCharacter.Attack(enemy, 20);
-            Assert.AreEqual(expectedHealth, enemy.HitPoints);
-        }
-
-        [TestMethod]
         public void CharacterHasAbilities()
         {
             var abilities = new Ability[]
@@ -99,6 +73,26 @@ namespace EverCraft_Kata.Tests
             {
                 Assert.IsNotNull(ability);
             }
+        }
+
+        [TestMethod]
+        public void DexterityModifiesCharacterArmor()
+        {
+            newCharacter.ChangeScoreTo(newCharacter.Dexterity, 12);
+            Assert.AreEqual(11, newCharacter.ArmorClass);
+
+            newCharacter.ChangeScoreTo(newCharacter.Dexterity, 0);
+            Assert.AreEqual(5, newCharacter.ArmorClass);
+        }
+
+        [TestMethod]
+        public void ConstitutionModifiesCharacterHitPoints()
+        {
+            newCharacter.ChangeScoreTo(newCharacter.Constitution, 20);
+            Assert.AreEqual(10, newCharacter.HitPoints);
+
+            newCharacter.ChangeScoreTo(newCharacter.Constitution, 0);
+            Assert.AreEqual(1, newCharacter.HitPoints);
         }
     }
 }

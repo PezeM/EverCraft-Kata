@@ -18,5 +18,13 @@ namespace EverCraft_Kata
         {
             Score = score;
         }
+
+        public void ChangeScoreTo(int score)
+        {
+            if (score >= 0 && score <= 20)
+            {
+                Score = score;
+            }
+        }
     }
 }
