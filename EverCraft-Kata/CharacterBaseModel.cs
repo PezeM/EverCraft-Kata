@@ -76,7 +76,7 @@ namespace EverCraft_Kata
                 Name = newName;
         }
 
-        public void SetAlignment(Alignment newAlignment)
+        public virtual void SetAlignment(Alignment newAlignment)
         {
             Alignment = newAlignment;
         }
@@ -108,7 +108,7 @@ namespace EverCraft_Kata
             return true;
         }
 
-        private void AddExperience(int exp)
+        protected void AddExperience(int exp)
         {
             experience += exp;
             RecalculateLevel();
@@ -127,7 +127,7 @@ namespace EverCraft_Kata
             HitPoints -= damage;
         }
 
-        private bool IsCrit(int hitRoll)
+        protected bool IsCrit(int hitRoll)
         {
             return hitRoll >= 20;
         }
