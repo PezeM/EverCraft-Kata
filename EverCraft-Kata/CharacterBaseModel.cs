@@ -52,7 +52,7 @@ namespace EverCraft_Kata
             CalculateAbilityModifiersToCharacter();
         }
 
-        private void CalculateAbilityModifiersToCharacter()
+        protected virtual void CalculateAbilityModifiersToCharacter()
         {
             // Dexterity - modifier to armor points
             ArmorClass = BASE_ARMOR_CLASS + Dexterity.Modifier;

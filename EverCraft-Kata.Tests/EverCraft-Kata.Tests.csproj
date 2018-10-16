@@ -55,6 +55,7 @@
     <Compile Include="CharacterAttackTests.cs" />
     <Compile Include="FighterTests.cs" />
     <Compile Include="RogueTests.cs" />
+    <Compile Include="MonkTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
