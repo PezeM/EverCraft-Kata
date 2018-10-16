@@ -6,7 +6,7 @@ namespace EverCraft_Kata.Tests
     [TestClass]
     public class CharacterTests
     {
-        private Character newCharacter = new Character("Adam");
+        private CharacterBaseModel newCharacter = new CharacterBaseModel("Adam");
 
         [TestMethod]
         public void CharacterHasAName()
@@ -55,7 +55,7 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void CharacterGainsALevelAfterGivenExperience()
         {
-            var enemy = new Character("Jake");
+            var enemy = new CharacterBaseModel("Jake");
             for (int i = 0; i < 101; i++)
             {
                 newCharacter.Attack(enemy, 10);
@@ -67,7 +67,7 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void CharacterIncreasesHitPointsWithLevelUp()
         {
-            var enemy = new Character("Jake");
+            var enemy = new CharacterBaseModel("Jake");
             for (int i = 0; i < 101; i++)
             {
                 newCharacter.Attack(enemy, 10);
@@ -80,7 +80,7 @@ namespace EverCraft_Kata.Tests
         public void CharacterCanDie()
         {
             // Character will die if the hitpoints are lower than 1
-            var enemy = new Character("Jake");
+            var enemy = new CharacterBaseModel("Jake");
             enemy.TakeDamage(5);
 
             Assert.IsTrue(enemy.IsDead);

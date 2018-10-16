@@ -2,20 +2,28 @@
 
 namespace EverCraft_Kata
 {
-    public class Character
+    public class CharacterBaseModel
     {
-        private const int BASE_ARMOR_CLASS = 10;
-        private const int BASE_HIT_POINTS = 5;
-        private const int BASE_LEVEL = 1;
+        protected const int BASE_ARMOR_CLASS = 10;
+        protected const int BASE_HIT_POINTS = 5;
+        protected const int BASE_LEVEL = 1;
 
-        private int experience = 0;
+        private int experience;
 
         public string Name { get; private set; }
         public Alignment Alignment { get; private set; }
         public int Level { get; private set; }
 
-        public int ArmorClass { get; private set; }
-        public int HitPoints { get; private set; }
+        public int ArmorClass { get; protected set; }
+        public int HitPoints { get; protected set; }
+
+        public virtual int TotalAttackRoll
+        {
+            get
+            {
+                return Level % 2 == 0 ? Level / 2 : 0;
+            }
+        }
 
         public bool IsDead { get { return HitPoints <= 0; } }
 
@@ -27,7 +35,7 @@ namespace EverCraft_Kata
         public Ability Intelligence { get; private set; }
         public Ability Charisma { get; private set; }
 
-        public Character(string name)
+        public CharacterBaseModel(string name)
         {
             Name = name;
             ArmorClass = 10;
@@ -52,12 +60,12 @@ namespace EverCraft_Kata
             RecalculateHitPoints();
         }
 
-        private void RecalculateHitPoints()
+        protected void RecalculateHitPoints()
         {
             HitPoints = Level * HitPointsPerLevel();
         }
 
-        private int HitPointsPerLevel()
+        protected virtual int HitPointsPerLevel()
         {
             return Math.Max(1, BASE_HIT_POINTS + Constitution.Modifier);
         }
@@ -73,14 +81,13 @@ namespace EverCraft_Kata
             Alignment = newAlignment;
         }
 
-        public bool Attack(Character enemy, int attackRoll)
+        public virtual bool Attack(CharacterBaseModel enemy, int attackRoll)
         {
-            // For every even level achieved, add one point to attack roll
-            var totallAttackRoll = Level % 2 == 0 ? attackRoll + (Level / 2) : attackRoll;
+            var totalAttackRoll = TotalAttackRoll + attackRoll;
 
             // If its critical multiply modifier times 2, otherwise just add strength modifier
-            var modifier = IsCrit(totallAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
-            var canHit = IsCrit(totallAttackRoll) || (totallAttackRoll + modifier) >= enemy.ArmorClass;
+            var modifier = IsCrit(totalAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
+            var canHit = IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass;
 
             // If the potential attack if lower than enemy's armor don't attack
             if (!canHit)
@@ -88,7 +95,7 @@ namespace EverCraft_Kata
 
             // Calculate attack damage
             int damage = 1 + modifier;
-            if (IsCrit(totallAttackRoll))
+            if (IsCrit(totalAttackRoll))
                 damage *= 2;
 
             // Only deal damage if its higher than 0 

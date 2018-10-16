@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="Ability.cs" />
     <Compile Include="Alignment.cs" />
-    <Compile Include="Character.cs" />
+    <Compile Include="CharacterBaseModel.cs" />
+    <Compile Include="Classes\Fighter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
