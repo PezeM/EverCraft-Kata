@@ -48,6 +48,7 @@
     <Compile Include="CharacterBaseModel.cs" />
     <Compile Include="Classes\Fighter.cs" />
     <Compile Include="Classes\Monk.cs" />
+    <Compile Include="Classes\Paladin.cs" />
     <Compile Include="Classes\Rogue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,7 +15,7 @@ namespace EverCraft_Kata.Classes
 
         public Fighter(string name) : base(name)
         {
-            HitPoints = 10;
+
         }
 
         protected override int HitPointsPerLevel()

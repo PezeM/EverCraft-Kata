@@ -11,7 +11,7 @@ namespace EverCraft_Kata
         private int experience;
 
         public string Name { get; private set; }
-        public Alignment Alignment { get; private set; }
+        public Alignment Alignment { get; protected set; }
         public int Level { get; private set; }
 
         public int ArmorClass { get; protected set; }
