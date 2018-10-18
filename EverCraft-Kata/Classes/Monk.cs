@@ -20,24 +20,18 @@ namespace EverCraft_Kata.Classes
             }
         }
 
+        // Adds positive wisdom modifier to armor class
+        public override int ArmorClass
+        {
+            get { return Wisdom.Modifier > 0 ? Wisdom.Modifier + base.ArmorClass : base.ArmorClass; }
+        }
+
+        // Monk has 6 hit points per level instead of 5
+        protected override int HitPointsPerLevel { get; } = 6;
+
         public Monk(string name) : base(name)
         {
 
-        }
-
-        protected override void CalculateAbilityModifiersToCharacter()
-        {
-            base.CalculateAbilityModifiersToCharacter();
-
-            if (Wisdom.Modifier > 0)
-            {
-                ArmorClass += Wisdom.Modifier;
-            }
-        }
-
-        protected override int HitPointsPerLevel()
-        {
-            return Math.Max(1, 6 + Constitution.Modifier);
         }
 
         public override bool Attack(CharacterBaseModel enemy, int attackRoll)

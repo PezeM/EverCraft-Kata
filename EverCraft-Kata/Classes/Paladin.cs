@@ -13,14 +13,12 @@ namespace EverCraft_Kata.Classes
             }
         }
 
+        // Paladin has 6 hit points per level instead of 5
+        protected override int HitPointsPerLevel { get; } = 8;
+
         public Paladin(string name) : base(name)
         {
             Alignment = Alignment.Good;
-        }
-
-        protected override int HitPointsPerLevel()
-        {
-            return Math.Max(1, 8 + Constitution.Modifier);
         }
 
         public override void SetAlignment(Alignment newAlignment)
@@ -73,7 +71,7 @@ namespace EverCraft_Kata.Classes
             return true;
         }
 
-        private bool IsEvil(CharacterBaseModel enemy)
+        private static bool IsEvil(CharacterBaseModel enemy)
         {
             return enemy.Alignment == Alignment.Evil;
         }

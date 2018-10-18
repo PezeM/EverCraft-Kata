@@ -4,18 +4,37 @@ namespace EverCraft_Kata
 {
     public class CharacterBaseModel
     {
-        protected const int BASE_ARMOR_CLASS = 10;
-        protected const int BASE_HIT_POINTS = 5;
-        protected const int BASE_LEVEL = 1;
+        private const int BASE_ARMOR_CLASS = 10;
+        private const int BASE_LEVEL = 1;
 
+        private int hitPoints;
         private int experience;
 
         public string Name { get; private set; }
         public Alignment Alignment { get; protected set; }
-        public int Level { get; private set; }
 
-        public int ArmorClass { get; protected set; }
-        public int HitPoints { get; protected set; }
+        public int Level
+        {
+            get { return BASE_LEVEL + (experience / 1000); }
+        }
+
+        public virtual int ArmorClass
+        {
+            get { return BASE_ARMOR_CLASS + Dexterity.Modifier; }
+        }
+
+        protected virtual int HitPointsPerLevel { get; } = 5;
+
+        public virtual int MaxHitPoints
+        {
+            get { return Level * Math.Max(1, HitPointsPerLevel + Constitution.Modifier); }
+        }
+
+        public int HitPoints
+        {
+            get { return hitPoints + MaxHitPoints; }
+            set { hitPoints = value - MaxHitPoints; }
+        }
 
         public virtual int TotalAttackRoll
         {
@@ -25,7 +44,10 @@ namespace EverCraft_Kata
             }
         }
 
-        public bool IsDead { get { return HitPoints <= 0; } }
+        public bool IsDead
+        {
+            get { return HitPoints <= 0; }
+        }
 
         // Abilities
         public Ability Strength { get; private set; }
@@ -38,9 +60,6 @@ namespace EverCraft_Kata
         public CharacterBaseModel(string name)
         {
             Name = name;
-            ArmorClass = 10;
-            HitPoints = 5;
-            Level = BASE_LEVEL;
 
             Strength = new Ability(10);
             Dexterity = new Ability(10);
@@ -48,26 +67,6 @@ namespace EverCraft_Kata
             Wisdom = new Ability(10);
             Intelligence = new Ability(10);
             Charisma = new Ability(10);
-
-            CalculateAbilityModifiersToCharacter();
-        }
-
-        protected virtual void CalculateAbilityModifiersToCharacter()
-        {
-            // Dexterity - modifier to armor points
-            ArmorClass = BASE_ARMOR_CLASS + Dexterity.Modifier;
-
-            RecalculateHitPoints();
-        }
-
-        protected void RecalculateHitPoints()
-        {
-            HitPoints = Level * HitPointsPerLevel();
-        }
-
-        protected virtual int HitPointsPerLevel()
-        {
-            return Math.Max(1, BASE_HIT_POINTS + Constitution.Modifier);
         }
 
         public void ChangeName(string newName)
@@ -98,28 +97,15 @@ namespace EverCraft_Kata
             if (IsCrit(totalAttackRoll))
                 damage *= 2;
 
-            // Only deal damage if its higher than 0 
+
             if (damage > 0)
             {
                 enemy.TakeDamage(damage);
                 AddExperience(10);
             }
+            // Only deal damage if its higher than 0 
 
             return true;
-        }
-
-        protected void AddExperience(int exp)
-        {
-            experience += exp;
-            RecalculateLevel();
-        }
-
-        private void RecalculateLevel()
-        {
-            var startingLevel = Level;
-            Level = BASE_LEVEL + (experience / 1000);
-
-            HitPoints += (Level - startingLevel) * HitPointsPerLevel();
         }
 
         public void TakeDamage(int damage)
@@ -127,15 +113,19 @@ namespace EverCraft_Kata
             HitPoints -= damage;
         }
 
-        protected bool IsCrit(int hitRoll)
+        protected static bool IsCrit(int hitRoll)
         {
             return hitRoll >= 20;
+        }
+
+        protected void AddExperience(int exp)
+        {
+            experience += exp;
         }
 
         public void ChangeScoreTo(Ability ability, int score)
         {
             ability.ChangeScoreTo(score);
-            CalculateAbilityModifiersToCharacter();
         }
     }
 }

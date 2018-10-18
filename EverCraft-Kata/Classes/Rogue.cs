@@ -16,7 +16,7 @@
         }
 
         // Rogue does triple dmg on crits
-        // Ignores an opponents dexterify modifier to armor class
+        // Ignores an opponents dexterity modifier to armor class
         public override bool Attack(CharacterBaseModel enemy, int attackRoll)
         {
             var totalAttackRoll = TotalAttackRoll + attackRoll;
