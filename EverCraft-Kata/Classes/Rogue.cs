@@ -15,33 +15,25 @@
             }
         }
 
-        // Rogue does triple dmg on crits
-        // Ignores an opponents dexterity modifier to armor class
-        public override bool Attack(CharacterBaseModel enemy, int attackRoll)
+        protected override int GetAttackModifier(int totalAttackRoll)
         {
-            var totalAttackRoll = TotalAttackRoll + attackRoll;
-
             // If its critical multiply modifier times 2, otherwise just add strength modifier
-            var modifier = IsCrit(totalAttackRoll) ? Dexterity.Modifier * 2 : Dexterity.Modifier;
-            var canHit = IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass - enemy.Dexterity.Modifier;
+            return IsCrit(totalAttackRoll) ? Dexterity.Modifier * 2 : Dexterity.Modifier;
+        }
 
-            // If the potential attack if lower than enemy's armor don't attack
-            if (!canHit)
-                return false;
+        protected override bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
+        {
+            // Ignores enemy dexterity modifier on armor
+            return IsCrit(totalAttackRoll) || totalAttackRoll + modifier >= enemy.ArmorClass - enemy.Dexterity.Modifier;
+        }
 
-            // Calculate attack damage
+        protected override int CalculateAttackDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy)
+        {
             int damage = 1 + modifier;
+            // Triples damage on crit
             if (IsCrit(totalAttackRoll))
                 damage *= 2 * 3;
-
-            // Only deal damage if its higher than 0 
-            if (damage > 0)
-            {
-                enemy.TakeDamage(damage);
-                AddExperience(10);
-            }
-
-            return true;
+            return damage;
         }
     }
 }

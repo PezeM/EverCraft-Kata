@@ -4,9 +4,6 @@ namespace EverCraft_Kata
 {
     public class CharacterBaseModel
     {
-        private const int BASE_ARMOR_CLASS = 10;
-        private const int BASE_LEVEL = 1;
-
         private int hitPoints;
         private int experience;
 
@@ -15,12 +12,14 @@ namespace EverCraft_Kata
 
         public int Level
         {
-            get { return BASE_LEVEL + (experience / 1000); }
+            get { return 1 + (experience / 1000); }
         }
+
+        public virtual int BaseArmorClass { get; } = 10;
 
         public virtual int ArmorClass
         {
-            get { return BASE_ARMOR_CLASS + Dexterity.Modifier; }
+            get { return BaseArmorClass + Dexterity.Modifier; }
         }
 
         protected virtual int HitPointsPerLevel { get; } = 5;
@@ -71,7 +70,8 @@ namespace EverCraft_Kata
 
         public void ChangeName(string newName)
         {
-            if (newName != string.Empty)
+            // Change name only if the new name is not empty and it's not the same as the old name
+            if (newName != string.Empty && newName != Name)
                 Name = newName;
         }
 
@@ -80,32 +80,52 @@ namespace EverCraft_Kata
             Alignment = newAlignment;
         }
 
-        public virtual bool Attack(CharacterBaseModel enemy, int attackRoll)
+        public bool Attack(CharacterBaseModel enemy, int attackRoll)
         {
-            var totalAttackRoll = TotalAttackRoll + attackRoll;
+            var totalAttackRoll = GetAttackRoll(attackRoll, enemy);
+            var modifier = GetAttackModifier(totalAttackRoll);
+            var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
 
-            // If its critical multiply modifier times 2, otherwise just add strength modifier
-            var modifier = IsCrit(totalAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
-            var canHit = IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass;
-
-            // If the potential attack if lower than enemy's armor don't attack
             if (!canHit)
                 return false;
 
+            var damage = CalculateAttackDamage(totalAttackRoll, modifier, enemy);
+
+            // Only deal damage if its higher than 0 
+            if (damage < 0)
+                return false;
+
+            enemy.TakeDamage(damage);
+            AddExperience(10);
+
+            return true;
+        }
+
+        protected virtual int GetAttackRoll(int attackRoll, CharacterBaseModel enemy)
+        {
+            // Returns TotalAttackRolls character has because of level and adds dice attack rolls
+            return TotalAttackRoll + attackRoll;
+        }
+
+        protected virtual int CalculateAttackDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy)
+        {
             // Calculate attack damage
             int damage = 1 + modifier;
             if (IsCrit(totalAttackRoll))
                 damage *= 2;
+            return damage;
+        }
 
+        protected virtual bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
+        {
+            // 100% hit chance at hit, otherwise hit must be bigger thane enemy armor
+            return IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass;
+        }
 
-            if (damage > 0)
-            {
-                enemy.TakeDamage(damage);
-                AddExperience(10);
-            }
-            // Only deal damage if its higher than 0 
-
-            return true;
+        protected virtual int GetAttackModifier(int totalAttackRoll)
+        {
+            // If its critical multiply modifier times 2, otherwise just add strength modifier
+            return IsCrit(totalAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
         }
 
         public void TakeDamage(int damage)

@@ -34,31 +34,13 @@ namespace EverCraft_Kata.Classes
 
         }
 
-        public override bool Attack(CharacterBaseModel enemy, int attackRoll)
+        protected override int CalculateAttackDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy)
         {
-            var totalAttackRoll = TotalAttackRoll + attackRoll;
-
-            // If its critical multiply modifier times 2, otherwise just add strength modifier
-            var modifier = IsCrit(totalAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
-            var canHit = IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass;
-
-            // If the potential attack if lower than enemy's armor don't attack
-            if (!canHit)
-                return false;
-
             // Calculate attack damage
             int damage = 3 + modifier;
             if (IsCrit(totalAttackRoll))
                 damage *= 2;
-
-            // Only deal damage if its higher than 0 
-            if (damage > 0)
-            {
-                enemy.TakeDamage(damage);
-                AddExperience(10);
-            }
-
-            return true;
+            return damage;
         }
     }
 }
