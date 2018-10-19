@@ -9,5 +9,8 @@
         int IntelligenceModifier { get; }
         int CharismaModifier { get; }
         int ArmorClassBonusModifier { get; }
+        int GetBonusHitPoints(CharacterBaseModel character);
+        int GetBonusAttackRoll(CharacterBaseModel enemy);
+        int GetBonusAttackDamage(CharacterBaseModel enemy);
     }
 }

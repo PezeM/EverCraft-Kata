@@ -27,7 +27,7 @@ namespace EverCraft_Kata
 
         public virtual int MaxHitPoints
         {
-            get { return Level * Math.Max(1, HitPointsPerLevel + ConstitutionModifier); }
+            get { return Level * Math.Max(1, HitPointsPerLevel + ConstitutionModifier) + Race.GetBonusHitPoints(this); }
         }
 
         public int HitPoints
@@ -99,8 +99,8 @@ namespace EverCraft_Kata
 
         public bool Attack(CharacterBaseModel enemy, int attackRoll)
         {
-            var totalAttackRoll = GetAttackRoll(attackRoll, enemy);
-            var modifier = GetAttackModifier(totalAttackRoll);
+            var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy);
+            var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
 
             if (!canHit)

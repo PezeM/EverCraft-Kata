@@ -52,6 +52,7 @@
     <Compile Include="Classes\Rogue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Races\Dwarf.cs" />
     <Compile Include="Races\Human.cs" />
     <Compile Include="Races\IRace.cs" />
     <Compile Include="Races\Orc.cs" />

@@ -58,6 +58,7 @@
     <Compile Include="ClassesTests\MonkTests.cs" />
     <Compile Include="ClassesTests\PaladinTests.cs" />
     <Compile Include="RacesTests\OrcTests.cs" />
+    <Compile Include="RacesTests\DwarfTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -14,17 +14,17 @@ namespace EverCraft_Kata.Tests.RacesTests
         public void OrcHasExtra2Armor()
         {
             newCharacter.ChangeRace(new Orc());
-            Assert.AreEqual(newCharacter.ArmorClass, 12);
+            Assert.AreEqual(12, newCharacter.ArmorClass);
         }
 
         [TestMethod]
         public void OrcHasMoreStrengthAndLessIntWisdomCharismaModifiers()
         {
             newCharacter.ChangeRace(new Orc());
-            Assert.AreEqual(newCharacter.StrengthModifier, 2);
-            Assert.AreEqual(newCharacter.IntelligenceModifier, -1);
-            Assert.AreEqual(newCharacter.WisdomModifier, -1);
-            Assert.AreEqual(newCharacter.CharismaModifier, -1);
+            Assert.AreEqual(2, newCharacter.StrengthModifier);
+            Assert.AreEqual(-1, newCharacter.IntelligenceModifier);
+            Assert.AreEqual(-1, newCharacter.WisdomModifier);
+            Assert.AreEqual(-1, newCharacter.CharismaModifier);
         }
     }
 }
