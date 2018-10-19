@@ -57,6 +57,7 @@
     <Compile Include="ClassesTests\RogueTests.cs" />
     <Compile Include="ClassesTests\MonkTests.cs" />
     <Compile Include="ClassesTests\PaladinTests.cs" />
+    <Compile Include="RacesTests\OrcTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -67,9 +68,7 @@
       <Name>EverCraft-Kata</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RacesTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

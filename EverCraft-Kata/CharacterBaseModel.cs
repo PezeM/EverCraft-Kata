@@ -16,7 +16,7 @@ namespace EverCraft_Kata
             get { return 1 + (experience / 1000); }
         }
 
-        public virtual int BaseArmorClass { get; } = 10;
+        protected virtual int BaseArmorClass { get; } = 10;
 
         public virtual int ArmorClass
         {
