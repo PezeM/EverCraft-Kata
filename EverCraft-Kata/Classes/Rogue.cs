@@ -18,13 +18,13 @@
         protected override int GetAttackModifier(int totalAttackRoll)
         {
             // If its critical multiply modifier times 2, otherwise just add strength modifier
-            return IsCrit(totalAttackRoll) ? Dexterity.Modifier * 2 : Dexterity.Modifier;
+            return IsCrit(totalAttackRoll) ? DexterityModifier * 2 : DexterityModifier;
         }
 
         protected override bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
         {
             // Ignores enemy dexterity modifier on armor
-            return IsCrit(totalAttackRoll) || totalAttackRoll + modifier >= enemy.ArmorClass - enemy.Dexterity.Modifier;
+            return IsCrit(totalAttackRoll) || totalAttackRoll + modifier >= enemy.ArmorClass - enemy.DexterityModifier;
         }
 
         protected override int CalculateAttackDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy)

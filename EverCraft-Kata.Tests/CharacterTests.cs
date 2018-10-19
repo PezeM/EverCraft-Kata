@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using EverCraft_Kata.Races;
 
 namespace EverCraft_Kata.Tests
 {
@@ -32,6 +33,19 @@ namespace EverCraft_Kata.Tests
         {
             newCharacter.SetAlignment(Alignment.Good);
             Assert.AreEqual(Alignment.Good, newCharacter.Alignment);
+        }
+
+        [TestMethod]
+        public void CharacterHasHumanAsStartingRace()
+        {
+            Assert.IsInstanceOfType(newCharacter.Race, typeof(Human));
+        }
+
+        [TestMethod]
+        public void CharacterCanChangeRace()
+        {
+            newCharacter.ChangeRace(new Orc());
+            Assert.IsInstanceOfType(newCharacter.Race, typeof(Orc));
         }
 
         [TestMethod]

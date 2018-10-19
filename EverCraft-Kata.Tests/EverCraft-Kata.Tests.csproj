@@ -53,10 +53,10 @@
     <Compile Include="CharacterTests.cs" />
     <Compile Include="AbilityTests.cs" />
     <Compile Include="CharacterAttackTests.cs" />
-    <Compile Include="FighterTests.cs" />
-    <Compile Include="RogueTests.cs" />
-    <Compile Include="MonkTests.cs" />
-    <Compile Include="PaladinTests.cs" />
+    <Compile Include="ClassesTests\FighterTests.cs" />
+    <Compile Include="ClassesTests\RogueTests.cs" />
+    <Compile Include="ClassesTests\MonkTests.cs" />
+    <Compile Include="ClassesTests\PaladinTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -66,6 +66,9 @@
       <Project>{e021d8ec-52d8-459a-a652-e89370efe03e}</Project>
       <Name>EverCraft-Kata</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RacesTests\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using EverCraft_Kata.Races;
 
 namespace EverCraft_Kata
 {
@@ -19,14 +20,14 @@ namespace EverCraft_Kata
 
         public virtual int ArmorClass
         {
-            get { return BaseArmorClass + Dexterity.Modifier; }
+            get { return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier; }
         }
 
         protected virtual int HitPointsPerLevel { get; } = 5;
 
         public virtual int MaxHitPoints
         {
-            get { return Level * Math.Max(1, HitPointsPerLevel + Constitution.Modifier); }
+            get { return Level * Math.Max(1, HitPointsPerLevel + ConstitutionModifier); }
         }
 
         public int HitPoints
@@ -48,6 +49,8 @@ namespace EverCraft_Kata
             get { return HitPoints <= 0; }
         }
 
+        public IRace Race { get; private set; }
+
         // Abilities
         public Ability Strength { get; private set; }
         public Ability Dexterity { get; private set; }
@@ -55,6 +58,13 @@ namespace EverCraft_Kata
         public Ability Wisdom { get; private set; }
         public Ability Intelligence { get; private set; }
         public Ability Charisma { get; private set; }
+
+        public int StrengthModifier => Strength.GetModifier() + Race.StrengthModifier;
+        public int DexterityModifier => Dexterity.GetModifier() + Race.DexterityModifier;
+        public int ConstitutionModifier => Constitution.GetModifier() + Race.ConstitutionModifier;
+        public int WisdomModifier => Wisdom.GetModifier() + Race.WisdomModifier;
+        public int IntelligenceModifier => Intelligence.GetModifier() + Race.IntelligenceModifier;
+        public int CharismaModifier => Charisma.GetModifier() + Race.CharismaModifier;
 
         public CharacterBaseModel(string name)
         {
@@ -66,6 +76,8 @@ namespace EverCraft_Kata
             Wisdom = new Ability(10);
             Intelligence = new Ability(10);
             Charisma = new Ability(10);
+
+            Race = new Human();
         }
 
         public void ChangeName(string newName)
@@ -73,6 +85,11 @@ namespace EverCraft_Kata
             // Change name only if the new name is not empty and it's not the same as the old name
             if (newName != string.Empty && newName != Name)
                 Name = newName;
+        }
+
+        public void ChangeRace(IRace race)
+        {
+            Race = race;
         }
 
         public virtual void SetAlignment(Alignment newAlignment)
@@ -125,7 +142,7 @@ namespace EverCraft_Kata
         protected virtual int GetAttackModifier(int totalAttackRoll)
         {
             // If its critical multiply modifier times 2, otherwise just add strength modifier
-            return IsCrit(totalAttackRoll) ? Strength.Modifier * 2 : Strength.Modifier;
+            return IsCrit(totalAttackRoll) ? StrengthModifier * 2 : StrengthModifier;
         }
 
         public void TakeDamage(int damage)

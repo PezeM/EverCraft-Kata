@@ -10,13 +10,13 @@ namespace EverCraft_Kata.Tests
         public void AbilityHasModifiers()
         {
             var ability = new Ability(10);
-            Assert.AreEqual(0, ability.Modifier);
+            Assert.AreEqual(0, ability.GetModifier());
 
             var secondAbility = new Ability(20);
-            Assert.AreEqual(5, secondAbility.Modifier);
+            Assert.AreEqual(5, secondAbility.GetModifier());
 
             var thirdAbility = new Ability(0);
-            Assert.AreEqual(-5, thirdAbility.Modifier);
+            Assert.AreEqual(-5, thirdAbility.GetModifier());
         }
     }
 }

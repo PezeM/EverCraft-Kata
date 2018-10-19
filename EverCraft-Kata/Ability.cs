@@ -6,12 +6,9 @@ namespace EverCraft_Kata
     {
         public int Score { get; private set; }
 
-        public int Modifier
+        public int GetModifier()
         {
-            get
-            {
-                return (int)Math.Floor((Score - 10) / 2.0);
-            }
+            return (int)Math.Floor((Score - 10) / 2.0);
         }
 
         public Ability(int score)
