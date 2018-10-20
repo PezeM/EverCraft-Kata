@@ -25,5 +25,7 @@ namespace EverCraft_Kata.Races
         {
             return enemy.Race.GetType() == typeof(Orc) ? 2 : 0;
         }
+        public int CriticalHitRangeModifier() => 0;
+        public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker) => 0;
     }
 }

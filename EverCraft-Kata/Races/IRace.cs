@@ -12,5 +12,7 @@
         int GetBonusHitPoints(CharacterBaseModel character);
         int GetBonusAttackRoll(CharacterBaseModel enemy);
         int GetBonusAttackDamage(CharacterBaseModel enemy);
+        int CriticalHitRangeModifier();
+        int BonusArmorClassWhenAttacked(CharacterBaseModel attacker);
     }
 }

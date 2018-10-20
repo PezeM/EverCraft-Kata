@@ -59,6 +59,7 @@
     <Compile Include="ClassesTests\PaladinTests.cs" />
     <Compile Include="RacesTests\OrcTests.cs" />
     <Compile Include="RacesTests\DwarfTests.cs" />
+    <Compile Include="RacesTests\ElfTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

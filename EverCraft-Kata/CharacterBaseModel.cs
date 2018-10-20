@@ -136,7 +136,7 @@ namespace EverCraft_Kata
         protected virtual bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
         {
             // 100% hit chance at hit, otherwise hit must be bigger thane enemy armor
-            return IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass;
+            return IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass + enemy.Race.BonusArmorClassWhenAttacked(this);
         }
 
         protected virtual int GetAttackModifier(int totalAttackRoll)
@@ -150,9 +150,9 @@ namespace EverCraft_Kata
             HitPoints -= damage;
         }
 
-        protected static bool IsCrit(int hitRoll)
+        protected bool IsCrit(int hitRoll)
         {
-            return hitRoll >= 20;
+            return hitRoll >= 20 - Race.CriticalHitRangeModifier();
         }
 
         protected void AddExperience(int exp)
