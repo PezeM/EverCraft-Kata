@@ -1,4 +1,6 @@
-﻿namespace EverCraft_Kata.Races
+﻿using System.Collections.Generic;
+
+namespace EverCraft_Kata.Races
 {
     public class Orc : IRace
     {
@@ -14,5 +16,11 @@
         public int GetBonusAttackDamage(CharacterBaseModel enemy) => 0;
         public int CriticalHitRangeModifier() => 0;
         public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker) => 0;
+        public List<Alignment> ListOfPossibleAlignments => new List<Alignment>
+        {
+            Alignment.Neutral,
+            Alignment.Good,
+            Alignment.Evil
+        };
     }
 }

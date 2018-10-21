@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EverCraft_Kata.Races
 {
@@ -27,5 +28,12 @@ namespace EverCraft_Kata.Races
         }
         public int CriticalHitRangeModifier() => 0;
         public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker) => 0;
+        public List<Alignment> ListOfPossibleAlignments => new List<Alignment>
+        {
+            Alignment.Neutral,
+            Alignment.Good,
+            Alignment.Evil
+        };
+
     }
 }

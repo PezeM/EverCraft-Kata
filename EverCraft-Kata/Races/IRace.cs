@@ -1,4 +1,6 @@
-﻿namespace EverCraft_Kata.Races
+﻿using System.Collections.Generic;
+
+namespace EverCraft_Kata.Races
 {
     public interface IRace
     {
@@ -14,5 +16,6 @@
         int GetBonusAttackDamage(CharacterBaseModel enemy);
         int CriticalHitRangeModifier();
         int BonusArmorClassWhenAttacked(CharacterBaseModel attacker);
+        List<Alignment> ListOfPossibleAlignments { get; }
     }
 }

@@ -9,7 +9,7 @@ namespace EverCraft_Kata
         private int experience;
 
         public string Name { get; private set; }
-        public Alignment Alignment { get; protected set; }
+        public Alignment Alignment { get; protected set; } = Alignment.Neutral;
 
         public int Level
         {
@@ -59,6 +59,7 @@ namespace EverCraft_Kata
         public Ability Intelligence { get; private set; }
         public Ability Charisma { get; private set; }
 
+        // Abilities modifiers
         public int StrengthModifier => Strength.GetModifier() + Race.StrengthModifier;
         public int DexterityModifier => Dexterity.GetModifier() + Race.DexterityModifier;
         public int ConstitutionModifier => Constitution.GetModifier() + Race.ConstitutionModifier;
@@ -94,7 +95,11 @@ namespace EverCraft_Kata
 
         public virtual void SetAlignment(Alignment newAlignment)
         {
-            Alignment = newAlignment;
+            // Set alignment if Race can have this alignment
+            if (Race.ListOfPossibleAlignments.Contains(newAlignment))
+            {
+                Alignment = newAlignment;
+            }
         }
 
         public bool Attack(CharacterBaseModel enemy, int attackRoll)
