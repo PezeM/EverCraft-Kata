@@ -1,5 +1,4 @@
-﻿using System;
-using EverCraft_Kata.Races;
+﻿using EverCraft_Kata.Races;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EverCraft_Kata.Tests.RacesTests
@@ -7,12 +6,14 @@ namespace EverCraft_Kata.Tests.RacesTests
     [TestClass]
     public class DwarfTests
     {
-        CharacterBaseModel dwarf = new CharacterBaseModel("Jake");
-        CharacterBaseModel orc = new CharacterBaseModel("Orc");
+        private CharacterBaseModel dwarf;
+        private CharacterBaseModel orc;
 
         [TestInitialize]
         public void TestInitialize()
         {
+            dwarf = new CharacterBaseModel("Jake");
+            orc = new CharacterBaseModel("Orc");
             dwarf.ChangeRace(new Dwarf());
             orc.ChangeRace(new Orc());
         }

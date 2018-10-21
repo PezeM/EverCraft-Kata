@@ -1,5 +1,4 @@
-﻿using System;
-using EverCraft_Kata.Classes;
+﻿using EverCraft_Kata.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EverCraft_Kata.Tests
@@ -7,12 +6,19 @@ namespace EverCraft_Kata.Tests
     [TestClass]
     public class RogueTests
     {
-        Rogue newRogue = new Rogue("Jake");
+        private Rogue newRogue;
+        private Rogue enemy;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            newRogue = new Rogue("Jake");
+            enemy = new Rogue("Enemy");
+        }
 
         [TestMethod]
         public void RogueDoesTripleDamageOnCrits()
         {
-            var enemy = new Rogue("Paul");
             newRogue.Attack(enemy, 20);
             Assert.AreEqual(-1, enemy.HitPoints);
         }
@@ -20,7 +26,6 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void RogueAddsDexterityModifierInsteadOfStrength()
         {
-            var enemy = new Rogue("Paul");
             newRogue.ChangeScoreTo(newRogue.Dexterity, 20);
             newRogue.Attack(enemy, 10);
             Assert.AreEqual(-1, enemy.HitPoints);
@@ -36,7 +41,6 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void RogueIgnoresOpponentsDexterityModifier()
         {
-            var enemy = new Rogue("Paul");
             enemy.ChangeScoreTo(enemy.Dexterity, 20);
             newRogue.Attack(enemy, 10);
             Assert.AreEqual(4, enemy.HitPoints);

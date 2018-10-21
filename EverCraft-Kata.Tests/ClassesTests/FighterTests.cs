@@ -6,14 +6,21 @@ namespace EverCraft_Kata.Tests
     [TestClass]
     public class FighterTests
     {
-        Fighter newFighter = new Fighter("Paul");
+        private Fighter newFighter;
+        private Fighter enemy;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            newFighter = new Fighter("Paul");
+            enemy = new Fighter("Enemy");
+        }
 
         [TestMethod]
         public void FighterHasAttackRollIncreasedEveryLevel()
         {
             Assert.AreEqual(1, newFighter.TotalAttackRoll);
 
-            var enemy = new Fighter("Enemy");
             for (int i = 0; i < 200; i++)
             {
                 newFighter.Attack(enemy, 10);
@@ -27,7 +34,6 @@ namespace EverCraft_Kata.Tests
         {
             Assert.AreEqual(10, newFighter.HitPoints);
 
-            var enemy = new Fighter("Enemy");
             for (int i = 0; i < 100; i++)
             {
                 newFighter.Attack(enemy, 10);

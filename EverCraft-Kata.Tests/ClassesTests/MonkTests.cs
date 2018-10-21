@@ -6,14 +6,21 @@ namespace EverCraft_Kata.Tests
     [TestClass]
     public class MonkTests
     {
-        Monk newMonk = new Monk("Jake");
+        private Monk newMonk;
+        private Rogue enemy;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            newMonk = new Monk("Jake");
+            enemy = new Rogue("Enemy");
+        }
 
         [TestMethod]
         public void MonkHas6HitPointsPerLevel()
         {
             Assert.AreEqual(6, newMonk.HitPoints);
 
-            var enemy = new Fighter("Enemy");
             for (int i = 0; i < 100; i++)
             {
                 newMonk.Attack(enemy, 10);
@@ -25,7 +32,6 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void MonkDoes3DmgOnSuccessfulAttac()
         {
-            var enemy = new Rogue("Enemy");
             newMonk.Attack(enemy, 10);
             Assert.AreEqual(2, enemy.HitPoints);
         }
@@ -40,7 +46,6 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void MonkHasAttackRollIsIncreasedEvery2ndAnd3rdLevel()
         {
-            var enemy = new Rogue("Enemy");
             for (int i = 0; i < 400; i++)
             {
                 newMonk.Attack(enemy, 10);
