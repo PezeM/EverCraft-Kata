@@ -26,11 +26,8 @@ namespace EverCraft_Kata.Classes
             }
         }
 
-        protected override int CalculateAttackDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy)
+        protected override int CalculateCritDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy, int damage)
         {
-            // Calculate attack damage
-            var damage = 1 + modifier;
-
             // Adds 2 damage if attacking evil character
             if (IsEvil(enemy))
                 damage += 2;

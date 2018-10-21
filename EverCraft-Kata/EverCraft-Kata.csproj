@@ -58,9 +58,13 @@
     <Compile Include="Races\Human.cs" />
     <Compile Include="Races\IRace.cs" />
     <Compile Include="Races\Orc.cs" />
+    <Compile Include="Weapons\Longsword.cs" />
+    <Compile Include="Weapons\Stick.cs" />
+    <Compile Include="Weapons\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

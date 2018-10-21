@@ -61,6 +61,7 @@
     <Compile Include="RacesTests\DwarfTests.cs" />
     <Compile Include="RacesTests\ElfTests.cs" />
     <Compile Include="RacesTests\HalflingTests.cs" />
+    <Compile Include="Weapons\LongswordTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

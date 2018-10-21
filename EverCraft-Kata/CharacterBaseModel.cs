@@ -1,5 +1,6 @@
 ﻿using System;
 using EverCraft_Kata.Races;
+using EverCraft_Kata.Weapons;
 
 namespace EverCraft_Kata
 {
@@ -50,6 +51,7 @@ namespace EverCraft_Kata
         }
 
         public IRace Race { get; private set; }
+        public Weapon Weapon { get; private set; }
 
         // Abilities
         public Ability Strength { get; private set; }
@@ -79,6 +81,7 @@ namespace EverCraft_Kata
             Charisma = new Ability(10);
 
             Race = new Human();
+            Weapon = new Stick();
         }
 
         public void ChangeName(string newName)
@@ -91,6 +94,11 @@ namespace EverCraft_Kata
         public void ChangeRace(IRace race)
         {
             Race = race;
+        }
+
+        public void ChangeWeapon(Weapon weapon)
+        {
+            Weapon = weapon;
         }
 
         public virtual void SetAlignment(Alignment newAlignment)
@@ -111,13 +119,14 @@ namespace EverCraft_Kata
             if (!canHit)
                 return false;
 
-            var damage = CalculateAttackDamage(totalAttackRoll, modifier, enemy);
+            var damage = CalculateAttackDamage(modifier) + Weapon.Damage;
+            var fullDamage = CalculateCritDamage(totalAttackRoll, modifier, enemy, damage);
 
             // Only deal damage if its higher than 0 
-            if (damage < 0)
+            if (fullDamage < 0)
                 return false;
 
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(fullDamage);
             AddExperience(10);
 
             return true;
@@ -129,13 +138,17 @@ namespace EverCraft_Kata
             return TotalAttackRoll + attackRoll;
         }
 
-        protected virtual int CalculateAttackDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy)
+        protected virtual int CalculateCritDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy, int damage)
         {
-            // Calculate attack damage
-            int damage = 1 + modifier;
             if (IsCrit(totalAttackRoll))
                 damage *= 2;
             return damage;
+        }
+
+        protected virtual int CalculateAttackDamage(int modifier)
+        {
+            // Calculate attack damage
+            return 1 + modifier;
         }
 
         protected virtual bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
