@@ -60,6 +60,7 @@
     <Compile Include="Races\Orc.cs" />
     <Compile Include="Weapons\ElvenLongsword.cs" />
     <Compile Include="Weapons\Longsword.cs" />
+    <Compile Include="Weapons\Nunchaku.cs" />
     <Compile Include="Weapons\Stick.cs" />
     <Compile Include="Weapons\Waraxe.cs" />
     <Compile Include="Weapons\Weapon.cs" />

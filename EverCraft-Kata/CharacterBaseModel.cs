@@ -114,7 +114,7 @@ namespace EverCraft_Kata
         {
             var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy)
                                                                    + Weapon.BonusAttackRoll
-                                                                   + Weapon.GetBonusConditionalDamage(enemy, this);
+                                                                   + Weapon.GetBonusConditionalAttackRoll(enemy, this);
 
             var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
@@ -123,6 +123,7 @@ namespace EverCraft_Kata
                 return false;
 
             var damage = CalculateAttackDamage(modifier) + Weapon.Damage + Weapon.BonusDamage + Weapon.GetBonusConditionalDamage(enemy, this);
+
             // Calculate crit damage if its crital hit
             int fullDamage = IsCrit(totalAttackRoll)
                 ? (int)(CalculateCritDamage(totalAttackRoll, enemy, damage) * Weapon.GetBonusCriticalHitModifier(this))
@@ -157,7 +158,7 @@ namespace EverCraft_Kata
 
         protected virtual bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
         {
-            // 100% hit chance at hit, otherwise hit must be bigger thane enemy armor
+            // 100% hit chance at critical hit, otherwise hit must be bigger thane enemy armor
             return IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass + enemy.Race.BonusArmorClassWhenAttacked(this);
         }
 

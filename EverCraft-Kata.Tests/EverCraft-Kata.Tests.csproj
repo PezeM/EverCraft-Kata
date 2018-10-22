@@ -63,6 +63,7 @@
     <Compile Include="RacesTests\HalflingTests.cs" />
     <Compile Include="Weapons\LongswordTests.cs" />
     <Compile Include="Weapons\ElvenLongswordTests.cs" />
+    <Compile Include="Weapons\NunchakuTests.cs" />
     <Compile Include="Weapons\WaraxeTests.cs" />
   </ItemGroup>
   <ItemGroup>

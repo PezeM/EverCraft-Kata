@@ -22,7 +22,7 @@
         public virtual double GetBonusCriticalHitModifier(CharacterBaseModel character) => 1;
 
         /// <summary>
-        /// Get bonus damage depending on the enemy class/race and attacker race/class
+        /// Get bonus damage depending on the enemy class/race or attacker race/class
         /// </summary>
         /// <param name="enemy">Character to attack</param>
         /// <param name="attacker">Character which is attacking</param>
