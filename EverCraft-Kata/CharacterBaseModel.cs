@@ -112,15 +112,21 @@ namespace EverCraft_Kata
 
         public bool Attack(CharacterBaseModel enemy, int attackRoll)
         {
-            var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy);
+            var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy)
+                                                                   + Weapon.BonusAttackRoll
+                                                                   + Weapon.GetBonusConditionalDamage(enemy, this);
+
             var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
 
             if (!canHit)
                 return false;
 
-            var damage = CalculateAttackDamage(modifier) + Weapon.Damage;
-            var fullDamage = CalculateCritDamage(totalAttackRoll, modifier, enemy, damage);
+            var damage = CalculateAttackDamage(modifier) + Weapon.Damage + Weapon.BonusDamage + Weapon.GetBonusConditionalDamage(enemy, this);
+            // Calculate crit damage if its crital hit
+            int fullDamage = IsCrit(totalAttackRoll)
+                ? (int)(CalculateCritDamage(totalAttackRoll, enemy, damage) * Weapon.GetBonusCriticalHitModifier(this))
+                : damage;
 
             // Only deal damage if its higher than 0 
             if (fullDamage < 0)
@@ -138,11 +144,9 @@ namespace EverCraft_Kata
             return TotalAttackRoll + attackRoll;
         }
 
-        protected virtual int CalculateCritDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy, int damage)
+        protected virtual int CalculateCritDamage(int totalAttackRoll, CharacterBaseModel enemy, int damage)
         {
-            if (IsCrit(totalAttackRoll))
-                damage *= 2;
-            return damage;
+            return damage * 2;
         }
 
         protected virtual int CalculateAttackDamage(int modifier)

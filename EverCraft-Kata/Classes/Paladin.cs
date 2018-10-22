@@ -10,7 +10,7 @@ namespace EverCraft_Kata.Classes
             get { return Level; }
         }
 
-        // Paladin has 6 hit points per level instead of 5
+        // Paladin has 8 hit points per level instead of 5
         protected override int HitPointsPerLevel { get; } = 8;
 
         public Paladin(string name) : base(name)
@@ -26,7 +26,7 @@ namespace EverCraft_Kata.Classes
             }
         }
 
-        protected override int CalculateCritDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy, int damage)
+        protected override int CalculateCritDamage(int totalAttackRoll, CharacterBaseModel enemy, int damage)
         {
             // Adds 2 damage if attacking evil character
             if (IsEvil(enemy))

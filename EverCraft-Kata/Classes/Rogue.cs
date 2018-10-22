@@ -27,12 +27,10 @@
             return IsCrit(totalAttackRoll) || totalAttackRoll + modifier >= enemy.ArmorClass - enemy.DexterityModifier;
         }
 
-        protected override int CalculateCritDamage(int totalAttackRoll, int modifier, CharacterBaseModel enemy, int damage)
+        protected override int CalculateCritDamage(int totalAttackRoll, CharacterBaseModel enemy, int damage)
         {
             // Triples damage on crit
-            if (IsCrit(totalAttackRoll))
-                damage *= 2 * 3;
-            return damage;
+            return (int)(base.CalculateCritDamage(totalAttackRoll, enemy, damage) * 1.5);
         }
     }
 }

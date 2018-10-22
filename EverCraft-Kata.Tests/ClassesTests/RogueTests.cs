@@ -20,7 +20,7 @@ namespace EverCraft_Kata.Tests
         public void RogueDoesTripleDamageOnCrits()
         {
             newRogue.Attack(enemy, 20);
-            Assert.AreEqual(-1, enemy.HitPoints);
+            Assert.AreEqual(2, enemy.HitPoints);
         }
 
         [TestMethod]
