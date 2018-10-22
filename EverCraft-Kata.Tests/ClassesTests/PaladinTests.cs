@@ -7,13 +7,14 @@ namespace EverCraft_Kata.Tests
     public class PaladinTests
     {
         private Paladin newPaladin;
-        private Rogue enemy;
+        private Rogue evilEnemy;
 
         [TestInitialize]
         public void TestInitialize()
         {
             newPaladin = new Paladin("Jaek");
-            enemy = new Rogue("Enemy");
+            evilEnemy = new Rogue("Enemy");
+            evilEnemy.SetAlignment(Alignment.Evil);
         }
 
         [TestMethod]
@@ -23,27 +24,26 @@ namespace EverCraft_Kata.Tests
 
             for (int i = 0; i < 100; i++)
             {
-                newPaladin.Attack(enemy, 10);
+                newPaladin.Attack(evilEnemy, 10);
             }
 
             Assert.AreEqual(16, newPaladin.HitPoints);
         }
 
         [TestMethod]
-        public void PaladinHasPlus2ToAttackRollAndDamageWhenAttackingEvilCharacter()
+        public void PaladinHasPlus2ToAttackRollEvilCharacter()
         {
-            enemy.SetAlignment(Alignment.Evil);
-            newPaladin.Attack(enemy, 18);
-            Assert.AreEqual(-13, enemy.HitPoints);
+            Assert.IsTrue(newPaladin.Attack(evilEnemy, 8));
         }
 
         [TestMethod]
         public void PaladinDoesTripleDamageWhenCrittingEvilCharacter()
         {
-            enemy.SetAlignment(Alignment.Evil);
-            newPaladin.ChangeScoreTo(newPaladin.Strength, 20);
-            newPaladin.Attack(enemy, 20);
-            Assert.AreEqual(-73, enemy.HitPoints);
+            var newEnemy = new Rogue("Jake");
+            newPaladin.Attack(evilEnemy, 20);
+            newPaladin.Attack(newEnemy, 20); // Not evil character
+            Assert.AreEqual(-4, evilEnemy.HitPoints);
+            Assert.AreEqual(3, newEnemy.HitPoints);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace EverCraft_Kata.Tests
 
             for (int i = 0; i < 200; i++)
             {
-                newPaladin.Attack(enemy, 10);
+                newPaladin.Attack(evilEnemy, 10);
             }
 
             Assert.AreEqual(3, newPaladin.TotalAttackRoll);

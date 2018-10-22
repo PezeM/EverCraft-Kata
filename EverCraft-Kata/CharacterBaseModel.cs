@@ -122,7 +122,7 @@ namespace EverCraft_Kata
             if (!canHit)
                 return false;
 
-            var damage = CalculateAttackDamage(modifier) + Weapon.Damage + Weapon.BonusDamage + Weapon.GetBonusConditionalDamage(enemy, this);
+            var damage = CalculateAttackDamage(modifier, enemy) + Weapon.Damage + Weapon.BonusDamage + Weapon.GetBonusConditionalDamage(enemy, this);
 
             // Calculate crit damage if its crital hit
             int fullDamage = IsCrit(totalAttackRoll)
@@ -150,7 +150,7 @@ namespace EverCraft_Kata
             return damage * 2;
         }
 
-        protected virtual int CalculateAttackDamage(int modifier)
+        protected virtual int CalculateAttackDamage(int modifier, CharacterBaseModel enemy)
         {
             // Calculate attack damage
             return 1 + modifier;
