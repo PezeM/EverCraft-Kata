@@ -3,5 +3,6 @@
     public interface IArmor
     {
         int ArmorClass { get; }
+        string Name { get; }
     }
 }

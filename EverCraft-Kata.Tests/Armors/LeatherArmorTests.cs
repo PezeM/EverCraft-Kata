@@ -15,7 +15,7 @@ namespace EverCraft_Kata.Tests.Armors
         {
             character = new CharacterBaseModel("Jake");
             enemy = new CharacterBaseModel("Enemy");
-            enemy.ChangeArmor(new LeatherArmor());
+            enemy.ChangeArmor(ArmorBase.LeatherArmor);
         }
 
         [TestMethod]

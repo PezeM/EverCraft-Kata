@@ -86,7 +86,7 @@ namespace EverCraft_Kata.Character
             Race = new Human();
             Weapon = new Stick();
             Armor = new ArmorBase();
-            Shield = new WoodenShield();
+            Shield = new ShieldBase();
         }
 
         public void ChangeName(string newName)
@@ -108,7 +108,8 @@ namespace EverCraft_Kata.Character
 
         public void ChangeArmor(ArmorBase armor)
         {
-            Armor = armor;
+            if (Armor.CanBeWornBy(this))
+                Armor = armor;
         }
 
         public void ChangeShield(ShieldBase shield)

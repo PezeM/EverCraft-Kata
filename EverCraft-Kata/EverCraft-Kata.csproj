@@ -47,14 +47,12 @@
     <Compile Include="Alignment.cs" />
     <Compile Include="Equipment\Armors\ArmorBase.cs" />
     <Compile Include="Equipment\Armors\IArmor.cs" />
-    <Compile Include="Equipment\Armors\LeatherArmor.cs" />
     <Compile Include="Equipment\Armors\ShieldBase.cs" />
     <Compile Include="Character\CharacterBaseModel.cs" />
     <Compile Include="Character\Classes\Fighter.cs" />
     <Compile Include="Character\Classes\Monk.cs" />
     <Compile Include="Character\Classes\Paladin.cs" />
     <Compile Include="Character\Classes\Rogue.cs" />
-    <Compile Include="Equipment\Armors\WoodenShield.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Character\Races\Dwarf.cs" />

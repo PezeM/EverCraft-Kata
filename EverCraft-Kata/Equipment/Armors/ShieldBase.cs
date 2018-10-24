@@ -1,7 +1,21 @@
 ﻿namespace EverCraft_Kata.Equipment.Armors
 {
-    public abstract class ShieldBase : IArmor
+    public class ShieldBase : IArmor
     {
-        public virtual int ArmorClass => 0;
+        /// <summary>
+        /// Bonus armor class
+        /// </summary>
+        public int ArmorClass { get; private set; } = 0;
+
+        /// <summary>
+        /// Name of the armor
+        /// </summary>
+        public string Name { get; private set; } = string.Empty;
+
+        public static ShieldBase WoodenShield = new ShieldBase()
+        {
+            Name = "Wooden shield",
+            ArmorClass = 5
+        };
     }
 }
