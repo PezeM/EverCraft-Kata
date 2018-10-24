@@ -1,4 +1,4 @@
-﻿using EverCraft_Kata.Classes;
+﻿using EverCraft_Kata.Character.Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EverCraft_Kata.Tests

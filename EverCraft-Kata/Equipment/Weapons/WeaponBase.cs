@@ -1,6 +1,8 @@
-﻿namespace EverCraft_Kata.Weapons
+﻿using EverCraft_Kata.Character;
+
+namespace EverCraft_Kata.Equipment.Weapons
 {
-    public abstract class Weapon
+    public abstract class WeaponBase
     {
         /// <summary>
         /// Basic weapon damage

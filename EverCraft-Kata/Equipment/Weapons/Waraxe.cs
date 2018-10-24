@@ -1,8 +1,9 @@
-﻿using EverCraft_Kata.Classes;
+﻿using EverCraft_Kata.Character;
+using EverCraft_Kata.Character.Classes;
 
-namespace EverCraft_Kata.Weapons
+namespace EverCraft_Kata.Equipment.Weapons
 {
-    public class Waraxe : Weapon
+    public class Waraxe : WeaponBase
     {
         public override int Damage => 6;
         public override int BonusAttackRoll => 2;

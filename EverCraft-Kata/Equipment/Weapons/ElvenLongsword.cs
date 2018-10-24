@@ -1,6 +1,7 @@
-﻿using EverCraft_Kata.Races;
+﻿using EverCraft_Kata.Character;
+using EverCraft_Kata.Character.Races;
 
-namespace EverCraft_Kata.Weapons
+namespace EverCraft_Kata.Equipment.Weapons
 {
     public class ElvenLongsword : Longsword
     {

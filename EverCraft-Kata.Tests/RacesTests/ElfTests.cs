@@ -1,4 +1,5 @@
-﻿using EverCraft_Kata.Races;
+﻿using EverCraft_Kata.Character;
+using EverCraft_Kata.Character.Races;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EverCraft_Kata.Tests.RacesTests

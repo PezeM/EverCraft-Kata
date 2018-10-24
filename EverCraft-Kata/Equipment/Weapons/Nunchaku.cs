@@ -1,8 +1,9 @@
-﻿using EverCraft_Kata.Classes;
+﻿using EverCraft_Kata.Character;
+using EverCraft_Kata.Character.Classes;
 
-namespace EverCraft_Kata.Weapons
+namespace EverCraft_Kata.Equipment.Weapons
 {
-    public class Nunchaku : Weapon
+    public class Nunchaku : WeaponBase
     {
         public override int Damage => 6;
 

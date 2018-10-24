@@ -1,11 +1,11 @@
 ﻿using EverCraft_Kata.Character;
-using EverCraft_Kata.Equipment.Weapons;
+using EverCraft_Kata.Equipment.Armors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EverCraft_Kata.Tests.Weapons
+namespace EverCraft_Kata.Tests.Armors
 {
     [TestClass]
-    public class LongswordTests
+    public class LeatherArmorTests
     {
         private CharacterBaseModel character;
         private CharacterBaseModel enemy;
@@ -14,15 +14,14 @@ namespace EverCraft_Kata.Tests.Weapons
         public void TestInitialize()
         {
             character = new CharacterBaseModel("Jake");
-            character.ChangeWeapon(new Longsword());
             enemy = new CharacterBaseModel("Enemy");
+            enemy.ChangeArmor(new LeatherArmor());
         }
 
         [TestMethod]
-        public void LongswordDoes5PointsOfDamage()
+        public void LeatherArmorGives2BonusArmorClass()
         {
-            character.Attack(enemy, 10);
-            Assert.AreEqual(-1, enemy.HitPoints);
+            Assert.IsFalse(character.Attack(enemy, 10));
         }
     }
 }

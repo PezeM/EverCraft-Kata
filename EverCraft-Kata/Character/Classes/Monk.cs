@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EverCraft_Kata.Classes
+﻿namespace EverCraft_Kata.Character.Classes
 {
     public class Monk : CharacterBaseModel
     {

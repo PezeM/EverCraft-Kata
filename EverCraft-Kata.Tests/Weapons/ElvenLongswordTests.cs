@@ -1,5 +1,6 @@
-﻿using EverCraft_Kata.Races;
-using EverCraft_Kata.Weapons;
+﻿using EverCraft_Kata.Character;
+using EverCraft_Kata.Character.Races;
+using EverCraft_Kata.Equipment.Weapons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EverCraft_Kata.Tests.Weapons

@@ -1,8 +1,9 @@
 ﻿using System;
-using EverCraft_Kata.Races;
-using EverCraft_Kata.Weapons;
+using EverCraft_Kata.Character.Races;
+using EverCraft_Kata.Equipment.Armors;
+using EverCraft_Kata.Equipment.Weapons;
 
-namespace EverCraft_Kata
+namespace EverCraft_Kata.Character
 {
     public class CharacterBaseModel
     {
@@ -21,7 +22,7 @@ namespace EverCraft_Kata
 
         public virtual int ArmorClass
         {
-            get { return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier; }
+            get { return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier + Armor.ArmorClass; }
         }
 
         protected virtual int HitPointsPerLevel { get; } = 5;
@@ -51,7 +52,9 @@ namespace EverCraft_Kata
         }
 
         public IRace Race { get; private set; }
-        public Weapon Weapon { get; private set; }
+        public WeaponBase Weapon { get; private set; }
+        public ShieldBase Shield { get; private set; }
+        public ArmorBase Armor { get; private set; }
 
         // Abilities
         public Ability Strength { get; private set; }
@@ -82,6 +85,8 @@ namespace EverCraft_Kata
 
             Race = new Human();
             Weapon = new Stick();
+            Armor = new ArmorBase();
+            Shield = new WoodenShield();
         }
 
         public void ChangeName(string newName)
@@ -96,9 +101,19 @@ namespace EverCraft_Kata
             Race = race;
         }
 
-        public void ChangeWeapon(Weapon weapon)
+        public void ChangeWeapon(WeaponBase weapon)
         {
             Weapon = weapon;
+        }
+
+        public void ChangeArmor(ArmorBase armor)
+        {
+            Armor = armor;
+        }
+
+        public void ChangeShield(ShieldBase shield)
+        {
+            Shield = shield;
         }
 
         public virtual void SetAlignment(Alignment newAlignment)
@@ -129,7 +144,7 @@ namespace EverCraft_Kata
                 ? (int)(CalculateCritDamage(totalAttackRoll, enemy, damage) * Weapon.GetBonusCriticalHitModifier(this))
                 : damage;
 
-            // Only deal damage if its higher than 0 
+            // Only deal damage if its higher than 0
             if (fullDamage < 0)
                 return false;
 

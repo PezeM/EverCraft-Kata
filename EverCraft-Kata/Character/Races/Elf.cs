@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace EverCraft_Kata.Races
+namespace EverCraft_Kata.Character.Races
 {
-    public class Halfling : IRace
+    public class Elf : IRace
     {
-        public int StrengthModifier { get; } = -1;
+        public int StrengthModifier { get; } = 0;
         public int DexterityModifier { get; } = 1;
-        public int ConstitutionModifier { get; } = 0;
+        public int ConstitutionModifier { get; } = -1;
         public int WisdomModifier { get; } = 0;
         public int IntelligenceModifier { get; } = 0;
         public int CharismaModifier { get; } = 0;
@@ -14,17 +14,18 @@ namespace EverCraft_Kata.Races
         public int GetBonusHitPoints(CharacterBaseModel character) => 0;
         public int GetBonusAttackRoll(CharacterBaseModel enemy) => 0;
         public int GetBonusAttackDamage(CharacterBaseModel enemy) => 0;
-        public int CriticalHitRangeModifier() => 0;
-        // +2 to armor class when being attacked by non halfing race
+        public int CriticalHitRangeModifier() => 1;
+        // If elf is attacked by orc then his armor is increased by 2
         public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker)
         {
-            return attacker.Race.GetType() != typeof(Halfling) ? 2 : 0;
+            return attacker.Race.GetType() == typeof(Orc) ? 2 : 0;
         }
 
         public List<Alignment> ListOfPossibleAlignments => new List<Alignment>
         {
             Alignment.Neutral,
-            Alignment.Good
+            Alignment.Good,
+            Alignment.Evil
         };
     }
 }

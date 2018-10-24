@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EverCraft_Kata.Races
+namespace EverCraft_Kata.Character.Races
 {
     public interface IRace
     {

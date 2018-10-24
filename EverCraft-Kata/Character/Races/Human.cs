@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 
-namespace EverCraft_Kata.Races
+namespace EverCraft_Kata.Character.Races
 {
-    public class Orc : IRace
+    public class Human : IRace
     {
-        public int StrengthModifier { get; } = 2;
+        public int StrengthModifier { get; } = 0;
         public int DexterityModifier { get; } = 0;
         public int ConstitutionModifier { get; } = 0;
-        public int WisdomModifier { get; } = -1;
-        public int IntelligenceModifier { get; } = -1;
-        public int CharismaModifier { get; } = -1;
-        public int ArmorClassBonusModifier { get; } = 2;
+        public int WisdomModifier { get; } = 0;
+        public int IntelligenceModifier { get; } = 0;
+        public int CharismaModifier { get; } = 0;
+        public int ArmorClassBonusModifier { get; } = 0;
         public int GetBonusHitPoints(CharacterBaseModel character) => 0;
         public int GetBonusAttackRoll(CharacterBaseModel enemy) => 0;
         public int GetBonusAttackDamage(CharacterBaseModel enemy) => 0;

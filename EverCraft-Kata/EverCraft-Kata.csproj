@@ -45,25 +45,30 @@
   <ItemGroup>
     <Compile Include="Ability.cs" />
     <Compile Include="Alignment.cs" />
-    <Compile Include="CharacterBaseModel.cs" />
-    <Compile Include="Classes\Fighter.cs" />
-    <Compile Include="Classes\Monk.cs" />
-    <Compile Include="Classes\Paladin.cs" />
-    <Compile Include="Classes\Rogue.cs" />
+    <Compile Include="Equipment\Armors\ArmorBase.cs" />
+    <Compile Include="Equipment\Armors\IArmor.cs" />
+    <Compile Include="Equipment\Armors\LeatherArmor.cs" />
+    <Compile Include="Equipment\Armors\ShieldBase.cs" />
+    <Compile Include="Character\CharacterBaseModel.cs" />
+    <Compile Include="Character\Classes\Fighter.cs" />
+    <Compile Include="Character\Classes\Monk.cs" />
+    <Compile Include="Character\Classes\Paladin.cs" />
+    <Compile Include="Character\Classes\Rogue.cs" />
+    <Compile Include="Equipment\Armors\WoodenShield.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Races\Dwarf.cs" />
-    <Compile Include="Races\Elf.cs" />
-    <Compile Include="Races\Halfling.cs" />
-    <Compile Include="Races\Human.cs" />
-    <Compile Include="Races\IRace.cs" />
-    <Compile Include="Races\Orc.cs" />
-    <Compile Include="Weapons\ElvenLongsword.cs" />
-    <Compile Include="Weapons\Longsword.cs" />
-    <Compile Include="Weapons\Nunchaku.cs" />
-    <Compile Include="Weapons\Stick.cs" />
-    <Compile Include="Weapons\Waraxe.cs" />
-    <Compile Include="Weapons\Weapon.cs" />
+    <Compile Include="Character\Races\Dwarf.cs" />
+    <Compile Include="Character\Races\Elf.cs" />
+    <Compile Include="Character\Races\Halfling.cs" />
+    <Compile Include="Character\Races\Human.cs" />
+    <Compile Include="Character\Races\IRace.cs" />
+    <Compile Include="Character\Races\Orc.cs" />
+    <Compile Include="Equipment\Weapons\ElvenLongsword.cs" />
+    <Compile Include="Equipment\Weapons\Longsword.cs" />
+    <Compile Include="Equipment\Weapons\Nunchaku.cs" />
+    <Compile Include="Equipment\Weapons\Stick.cs" />
+    <Compile Include="Equipment\Weapons\Waraxe.cs" />
+    <Compile Include="Equipment\Weapons\WeaponBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
