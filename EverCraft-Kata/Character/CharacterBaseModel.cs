@@ -108,7 +108,7 @@ namespace EverCraft_Kata.Character
 
         public void ChangeArmor(ArmorBase armor)
         {
-            if (Armor.CanBeWornBy(this))
+            if (armor.CanBeWornBy(this))
                 Armor = armor;
         }
 

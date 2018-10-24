@@ -1,5 +1,8 @@
 ﻿namespace EverCraft_Kata.Equipment.Armors
 {
+    /// <summary>
+    /// Shield to waar
+    /// </summary>
     public class ShieldBase : IArmor
     {
         /// <summary>

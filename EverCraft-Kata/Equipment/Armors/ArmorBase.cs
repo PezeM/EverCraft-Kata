@@ -5,6 +5,9 @@ using EverCraft_Kata.Character.Races;
 
 namespace EverCraft_Kata.Equipment.Armors
 {
+    /// <summary>
+    /// Armor to wear
+    /// </summary>
     public class ArmorBase : IArmor
     {
         /// <summary>
@@ -23,7 +26,7 @@ namespace EverCraft_Kata.Equipment.Armors
         public static ArmorBase LeatherArmor = new ArmorBase()
         {
             Name = "Leather armor",
-            ArmorClass = 5
+            ArmorClass = 2
         };
 
         // Plate armor
