@@ -16,9 +16,19 @@ namespace EverCraft_Kata.Equipment.Armors
         public int ArmorClass { get; private set; } = 0;
 
         /// <summary>
+        /// Bonus armor depending on class/race or alignment
+        /// </summary>
+        public Func<CharacterBaseModel, int> BonusConditionalArmor = a => 0;
+
+        /// <summary>
         /// All damage reduction
         /// </summary>
         public int DamageReduction { get; private set; } = 0;
+
+        /// <summary>
+        /// Bonus to attack roll
+        /// </summary>
+        public Func<CharacterBaseModel, int> BonusAttackRoll = b => 0;
 
         /// <summary>
         /// Name of the armor
@@ -49,6 +59,14 @@ namespace EverCraft_Kata.Equipment.Armors
             Name = "Magical leather armor of damage reduction",
             ArmorClass = 2,
             DamageReduction = 2
+        };
+
+        public static ArmorBase ElvenChainMail = new ArmorBase
+        {
+            Name = "Elven chain mail",
+            BonusConditionalArmor = a => a.Race.GetType() == typeof(Elf) ? 3 : 0,
+            ArmorClass = 5,
+            BonusAttackRoll = b => b.Race.GetType() == typeof(Elf) ? 1 : 0
         };
     }
 }

@@ -22,7 +22,11 @@ namespace EverCraft_Kata.Character
 
         public virtual int ArmorClass
         {
-            get { return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier + Armor.ArmorClass; }
+            get
+            {
+                return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier
+                       + Armor.ArmorClass + Armor.BonusConditionalArmor(this);
+            }
         }
 
         protected virtual int HitPointsPerLevel { get; } = 5;
@@ -130,7 +134,8 @@ namespace EverCraft_Kata.Character
         {
             var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy)
                                                                    + Weapon.BonusAttackRoll
-                                                                   + Weapon.GetBonusConditionalAttackRoll(enemy, this);
+                                                                   + Weapon.GetBonusConditionalAttackRoll(enemy, this)
+                                                                   + Armor.BonusAttackRoll(this);
 
             var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
