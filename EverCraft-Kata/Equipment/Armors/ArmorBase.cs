@@ -10,31 +10,20 @@ namespace EverCraft_Kata.Equipment.Armors
     /// </summary>
     public class ArmorBase : IArmor
     {
-        /// <summary>
-        /// Bonus armor class
-        /// </summary>
         public int ArmorClass { get; private set; } = 0;
 
         /// <summary>
-        /// Bonus armor depending on class/race or alignment
+        /// Bonus armor depending on class/race or alignment 
         /// </summary>
         public Func<CharacterBaseModel, int> BonusConditionalArmor = a => 0;
 
-        /// <summary>
-        /// All damage reduction
-        /// </summary>
         public int DamageReduction { get; private set; } = 0;
-
-        /// <summary>
-        /// Bonus to attack roll
-        /// </summary>
-        public Func<CharacterBaseModel, int> BonusAttackRoll = b => 0;
-
-        /// <summary>
-        /// Name of the armor
-        /// </summary>
+        public Func<CharacterBaseModel, int> BonusConditionalAttackRoll { get; private set; } = b => 0;
         public string Name { get; private set; } = string.Empty;
 
+        /// <summary>
+        /// Race/class that can wear this armor, by default everyone can wear this
+        /// </summary>
         public Func<CharacterBaseModel, bool> CanBeWornBy = w => true;
 
         // Leather armor
@@ -66,7 +55,7 @@ namespace EverCraft_Kata.Equipment.Armors
             Name = "Elven chain mail",
             BonusConditionalArmor = a => a.Race.GetType() == typeof(Elf) ? 3 : 0,
             ArmorClass = 5,
-            BonusAttackRoll = b => b.Race.GetType() == typeof(Elf) ? 1 : 0
+            BonusConditionalAttackRoll = b => b.Race.GetType() == typeof(Elf) ? 1 : 0
         };
     }
 }

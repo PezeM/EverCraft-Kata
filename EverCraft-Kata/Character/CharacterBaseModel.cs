@@ -25,7 +25,7 @@ namespace EverCraft_Kata.Character
             get
             {
                 return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier
-                       + Armor.ArmorClass + Armor.BonusConditionalArmor(this);
+                       + Armor.ArmorClass + Armor.BonusConditionalArmor(this) + Shield.ArmorClass;
             }
         }
 
@@ -133,7 +133,9 @@ namespace EverCraft_Kata.Character
             var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy)
                                                                    + Weapon.BonusAttackRoll
                                                                    + Weapon.GetBonusConditionalAttackRoll(enemy, this)
-                                                                   + Armor.BonusAttackRoll(this);
+                                                                   + Shield.BonusAttackRoll
+                                                                   + Shield.BonusConditionalAttackRoll(this)
+                                                                   + Armor.BonusConditionalAttackRoll(this);
 
             var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
