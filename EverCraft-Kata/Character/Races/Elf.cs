@@ -21,11 +21,6 @@ namespace EverCraft_Kata.Character.Races
             return attacker.Race.GetType() == typeof(Orc) ? 2 : 0;
         }
 
-        public List<Alignment> ListOfPossibleAlignments => new List<Alignment>
-        {
-            Alignment.Neutral,
-            Alignment.Good,
-            Alignment.Evil
-        };
+        public List<Alignment> ListOfNotPossibleAlignments => new List<Alignment>();
     }
 }

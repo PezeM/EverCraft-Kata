@@ -21,10 +21,9 @@ namespace EverCraft_Kata.Character.Races
             return attacker.Race.GetType() != typeof(Halfling) ? 2 : 0;
         }
 
-        public List<Alignment> ListOfPossibleAlignments => new List<Alignment>
+        public List<Alignment> ListOfNotPossibleAlignments => new List<Alignment>
         {
-            Alignment.Neutral,
-            Alignment.Good
+            Alignment.Evil
         };
     }
 }

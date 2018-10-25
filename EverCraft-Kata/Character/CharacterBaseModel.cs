@@ -123,11 +123,9 @@ namespace EverCraft_Kata.Character
 
         public virtual void SetAlignment(Alignment newAlignment)
         {
-            // Set alignment if Race can have this alignment
-            if (Race.ListOfPossibleAlignments.Contains(newAlignment))
-            {
-                Alignment = newAlignment;
-            }
+            if (Race.ListOfNotPossibleAlignments.Contains(newAlignment))
+                return;
+            Alignment = newAlignment;
         }
 
         public bool Attack(CharacterBaseModel enemy, int attackRoll)

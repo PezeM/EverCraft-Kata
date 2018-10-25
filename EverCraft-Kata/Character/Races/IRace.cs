@@ -16,6 +16,6 @@ namespace EverCraft_Kata.Character.Races
         int GetBonusAttackDamage(CharacterBaseModel enemy);
         int CriticalHitRangeModifier();
         int BonusArmorClassWhenAttacked(CharacterBaseModel attacker);
-        List<Alignment> ListOfPossibleAlignments { get; }
+        List<Alignment> ListOfNotPossibleAlignments { get; }
     }
 }
