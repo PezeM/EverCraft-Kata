@@ -141,9 +141,11 @@ namespace EverCraft_Kata.Character
             var damage = CalculateAttackDamage(modifier, enemy) + Weapon.Damage + Weapon.BonusDamage + Weapon.GetBonusConditionalDamage(enemy, this);
 
             // Calculate crit damage if its crital hit
-            int fullDamage = IsCrit(totalAttackRoll)
+            var critDamage = IsCrit(totalAttackRoll)
                 ? (int)(CalculateCritDamage(totalAttackRoll, enemy, damage) * Weapon.GetBonusCriticalHitModifier(this))
                 : damage;
+
+            int fullDamage = critDamage - enemy.Armor.DamageReduction;
 
             // Only deal damage if its higher than 0
             if (fullDamage < 0)
