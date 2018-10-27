@@ -14,7 +14,7 @@ namespace EverCraft_Kata.Tests
         {
             newPaladin = new Paladin("Jaek");
             evilEnemy = new Rogue("Enemy");
-            evilEnemy.SetAlignment(Alignment.Evil);
+            evilEnemy.ChangeAlignment(Alignment.Evil);
         }
 
         [TestMethod]

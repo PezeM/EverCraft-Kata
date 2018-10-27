@@ -53,6 +53,8 @@
     <Compile Include="Character\Classes\Monk.cs" />
     <Compile Include="Character\Classes\Paladin.cs" />
     <Compile Include="Character\Classes\Rogue.cs" />
+    <Compile Include="Equipment\OtherItems\Item.cs" />
+    <Compile Include="Equipment\OtherItems\ItemsDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Character\Races\Dwarf.cs" />

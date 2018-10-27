@@ -26,7 +26,7 @@ namespace EverCraft_Kata.Tests.RacesTests
         [TestMethod]
         public void HalflingCannotHaveEvilAlignment()
         {
-            halfling.SetAlignment(Alignment.Evil);
+            halfling.ChangeAlignment(Alignment.Evil);
             Assert.AreNotEqual(Alignment.Evil, halfling.Alignment);
         }
 

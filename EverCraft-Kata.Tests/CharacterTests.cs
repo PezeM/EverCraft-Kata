@@ -40,7 +40,7 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void CharacterCanChangeAlignment()
         {
-            newCharacter.SetAlignment(Alignment.Good);
+            newCharacter.ChangeAlignment(Alignment.Good);
             Assert.AreEqual(Alignment.Good, newCharacter.Alignment);
         }
 

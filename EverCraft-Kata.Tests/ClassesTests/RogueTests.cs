@@ -34,7 +34,7 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void RogueCannotHaveGoodAlignment()
         {
-            newRogue.SetAlignment(Alignment.Good);
+            newRogue.ChangeAlignment(Alignment.Good);
             Assert.AreNotEqual(Alignment.Good, newRogue.Alignment);
         }
 

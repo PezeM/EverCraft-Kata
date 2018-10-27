@@ -1,7 +1,5 @@
-﻿using System;
-using EverCraft_Kata.Character;
+﻿using EverCraft_Kata.Character;
 using EverCraft_Kata.Character.Classes;
-using EverCraft_Kata.Character.Races;
 using EverCraft_Kata.Equipment.Armors;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

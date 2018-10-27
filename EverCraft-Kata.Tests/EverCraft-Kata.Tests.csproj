@@ -54,6 +54,10 @@
     <Compile Include="Armors\MagicalLeatherArmor.cs" />
     <Compile Include="Armors\ElvenChainMail.cs" />
     <Compile Include="Armors\SteelShieldTests.cs" />
+    <Compile Include="Items\InventoryTests.cs" />
+    <Compile Include="Items\RingsTests.cs" />
+    <Compile Include="Items\BeltTests.cs" />
+    <Compile Include="Items\AmuletsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CharacterTests.cs" />
     <Compile Include="AbilityTests.cs" />

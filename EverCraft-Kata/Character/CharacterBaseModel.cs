@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using EverCraft_Kata.Character.Races;
 using EverCraft_Kata.Equipment.Armors;
+using EverCraft_Kata.Equipment.OtherItems;
 using EverCraft_Kata.Equipment.Weapons;
 
 namespace EverCraft_Kata.Character
@@ -25,7 +27,7 @@ namespace EverCraft_Kata.Character
             get
             {
                 return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier
-                       + Armor.ArmorClass + Armor.BonusConditionalArmor(this) + Shield.ArmorClass;
+                       + Armor.ArmorClass + Armor.BonusConditionalArmor(this) + Shield.ArmorClass + ItemsBonusArmorClass();
             }
         }
 
@@ -59,6 +61,7 @@ namespace EverCraft_Kata.Character
         public WeaponBase Weapon { get; private set; }
         public ShieldBase Shield { get; private set; }
         public ArmorBase Armor { get; private set; }
+        public List<Item> Items { get; private set; }
 
         // Abilities
         public Ability Strength { get; private set; }
@@ -91,6 +94,7 @@ namespace EverCraft_Kata.Character
             Weapon = new Stick();
             Armor = new ArmorBase();
             Shield = new ShieldBase();
+            Items = new List<Item>();
         }
 
         public void ChangeName(string newName)
@@ -121,11 +125,50 @@ namespace EverCraft_Kata.Character
             Shield = shield;
         }
 
-        public virtual void SetAlignment(Alignment newAlignment)
+        public void AddItemToInventory(Item itemToAdd)
+        {
+            // Inventory can't have 2 the same items
+            if (Items.Contains(itemToAdd))
+                return;
+
+            Items.Add(itemToAdd);
+
+            if (itemToAdd.BonusStrengthScore != 0)
+                ChangeScoreTo(Strength, Strength.Score + itemToAdd.BonusStrengthScore);
+        }
+
+        public void RemoveItemFromInventory(Item itemToRemove)
+        {
+            Items.Remove(itemToRemove);
+        }
+
+        public virtual void ChangeAlignment(Alignment newAlignment)
         {
             if (Race.ListOfNotPossibleAlignments.Contains(newAlignment))
                 return;
             Alignment = newAlignment;
+        }
+
+        private int ItemsBonusArmorClass()
+        {
+            var bonusArmor = 0;
+            foreach (var item in Items)
+            {
+                bonusArmor += item.BonusArmorClass;
+            }
+
+            return bonusArmor;
+        }
+
+        private int BonusItemsConditionalAttackRoll(CharacterBaseModel characterBaseModel, CharacterBaseModel enemy)
+        {
+            var bonusAttackRoll = 0;
+            foreach (var item in Items)
+            {
+                bonusAttackRoll += item.BonusConditionalAttack(characterBaseModel, enemy);
+            }
+
+            return bonusAttackRoll;
         }
 
         public bool Attack(CharacterBaseModel enemy, int attackRoll)
@@ -135,7 +178,8 @@ namespace EverCraft_Kata.Character
                                                                    + Weapon.GetBonusConditionalAttackRoll(enemy, this)
                                                                    + Shield.BonusAttackRoll
                                                                    + Shield.BonusConditionalAttackRoll(this)
-                                                                   + Armor.BonusConditionalAttackRoll(this);
+                                                                   + Armor.BonusConditionalAttackRoll(this)
+                                                                   + BonusItemsConditionalAttackRoll(this, enemy);
 
             var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);

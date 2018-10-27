@@ -16,11 +16,11 @@
             Alignment = Alignment.Good;
         }
 
-        public override void SetAlignment(Alignment newAlignment)
+        public override void ChangeAlignment(Alignment newAlignment)
         {
             if (newAlignment == Alignment.Good)
             {
-                base.SetAlignment(newAlignment);
+                base.ChangeAlignment(newAlignment);
             }
         }
 
