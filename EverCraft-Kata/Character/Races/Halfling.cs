@@ -2,26 +2,18 @@
 
 namespace EverCraft_Kata.Character.Races
 {
-    public class Halfling : IRace
+    public class Halfling : RaceBase
     {
-        public int StrengthModifier { get; } = -1;
-        public int DexterityModifier { get; } = 1;
-        public int ConstitutionModifier { get; } = 0;
-        public int WisdomModifier { get; } = 0;
-        public int IntelligenceModifier { get; } = 0;
-        public int CharismaModifier { get; } = 0;
-        public int ArmorClassBonusModifier { get; } = 0;
-        public int GetBonusHitPoints(CharacterBaseModel character) => 0;
-        public int GetBonusAttackRoll(CharacterBaseModel enemy) => 0;
-        public int GetBonusAttackDamage(CharacterBaseModel enemy) => 0;
-        public int CriticalHitRangeModifier() => 0;
-        // +2 to armor class when being attacked by non halfing race
-        public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker)
+        public override int StrengthModifier { get; } = -1;
+        public override int DexterityModifier { get; } = 1;
+
+        // +2 to armor class when being attacked by non halfing raceBase
+        public override int BonusArmorClassWhenAttacked(CharacterBaseModel attacker)
         {
-            return attacker.Race.GetType() != typeof(Halfling) ? 2 : 0;
+            return attacker.RaceBase.GetType() != typeof(Halfling) ? 2 : 0;
         }
 
-        public List<Alignment> ListOfNotPossibleAlignments => new List<Alignment>
+        public override List<Alignment> ListOfNotPossibleAlignments => new List<Alignment>
         {
             Alignment.Evil
         };

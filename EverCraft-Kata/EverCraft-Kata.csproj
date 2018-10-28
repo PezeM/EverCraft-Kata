@@ -61,7 +61,7 @@
     <Compile Include="Character\Races\Elf.cs" />
     <Compile Include="Character\Races\Halfling.cs" />
     <Compile Include="Character\Races\Human.cs" />
-    <Compile Include="Character\Races\IRace.cs" />
+    <Compile Include="Character\Races\RaceBase.cs" />
     <Compile Include="Character\Races\Orc.cs" />
     <Compile Include="Equipment\Weapons\ElvenLongsword.cs" />
     <Compile Include="Equipment\Weapons\Longsword.cs" />

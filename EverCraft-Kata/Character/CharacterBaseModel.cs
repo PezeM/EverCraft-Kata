@@ -26,7 +26,7 @@ namespace EverCraft_Kata.Character
         {
             get
             {
-                return BaseArmorClass + DexterityModifier + Race.ArmorClassBonusModifier
+                return BaseArmorClass + DexterityModifier + RaceBase.ArmorClassBonusModifier
                        + Armor.ArmorClass + Armor.BonusConditionalArmor(this) + Shield.ArmorClass + ItemsBonusArmorClass();
             }
         }
@@ -35,7 +35,7 @@ namespace EverCraft_Kata.Character
 
         public virtual int MaxHitPoints
         {
-            get { return Level * Math.Max(1, HitPointsPerLevel + ConstitutionModifier) + Race.GetBonusHitPoints(this); }
+            get { return Level * Math.Max(1, HitPointsPerLevel + ConstitutionModifier) + RaceBase.GetBonusHitPoints(this); }
         }
 
         public int HitPoints
@@ -57,7 +57,7 @@ namespace EverCraft_Kata.Character
             get { return HitPoints <= 0; }
         }
 
-        public IRace Race { get; private set; }
+        public RaceBase RaceBase { get; private set; }
         public WeaponBase Weapon { get; private set; }
         public ShieldBase Shield { get; private set; }
         public ArmorBase Armor { get; private set; }
@@ -72,12 +72,12 @@ namespace EverCraft_Kata.Character
         public Ability Charisma { get; private set; }
 
         // Abilities modifiers
-        public int StrengthModifier => Strength.GetModifier() + Race.StrengthModifier;
-        public int DexterityModifier => Dexterity.GetModifier() + Race.DexterityModifier;
-        public int ConstitutionModifier => Constitution.GetModifier() + Race.ConstitutionModifier;
-        public int WisdomModifier => Wisdom.GetModifier() + Race.WisdomModifier;
-        public int IntelligenceModifier => Intelligence.GetModifier() + Race.IntelligenceModifier;
-        public int CharismaModifier => Charisma.GetModifier() + Race.CharismaModifier;
+        public int StrengthModifier => Strength.GetModifier() + RaceBase.StrengthModifier;
+        public int DexterityModifier => Dexterity.GetModifier() + RaceBase.DexterityModifier;
+        public int ConstitutionModifier => Constitution.GetModifier() + RaceBase.ConstitutionModifier;
+        public int WisdomModifier => Wisdom.GetModifier() + RaceBase.WisdomModifier;
+        public int IntelligenceModifier => Intelligence.GetModifier() + RaceBase.IntelligenceModifier;
+        public int CharismaModifier => Charisma.GetModifier() + RaceBase.CharismaModifier;
 
         public CharacterBaseModel(string name)
         {
@@ -90,7 +90,7 @@ namespace EverCraft_Kata.Character
             Intelligence = new Ability(10);
             Charisma = new Ability(10);
 
-            Race = new Human();
+            RaceBase = new Human();
             Weapon = new Stick();
             Armor = new ArmorBase();
             Shield = new ShieldBase();
@@ -104,9 +104,9 @@ namespace EverCraft_Kata.Character
                 Name = newName;
         }
 
-        public void ChangeRace(IRace race)
+        public void ChangeRace(RaceBase raceBase)
         {
-            Race = race;
+            RaceBase = raceBase;
         }
 
         public void ChangeWeapon(WeaponBase weapon)
@@ -144,7 +144,7 @@ namespace EverCraft_Kata.Character
 
         public virtual void ChangeAlignment(Alignment newAlignment)
         {
-            if (Race.ListOfNotPossibleAlignments.Contains(newAlignment))
+            if (RaceBase.ListOfNotPossibleAlignments.Contains(newAlignment))
                 return;
             Alignment = newAlignment;
         }
@@ -173,7 +173,7 @@ namespace EverCraft_Kata.Character
 
         public bool Attack(CharacterBaseModel enemy, int attackRoll)
         {
-            var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + Race.GetBonusAttackRoll(enemy)
+            var totalAttackRoll = GetAttackRoll(attackRoll, enemy) + RaceBase.GetBonusAttackRoll(enemy)
                                                                    + Weapon.BonusAttackRoll
                                                                    + Weapon.GetBonusConditionalAttackRoll(enemy, this)
                                                                    + Shield.BonusAttackRoll
@@ -181,7 +181,7 @@ namespace EverCraft_Kata.Character
                                                                    + Armor.BonusConditionalAttackRoll(this)
                                                                    + BonusItemsConditionalAttackRoll(this, enemy);
 
-            var modifier = GetAttackModifier(totalAttackRoll) + Race.GetBonusAttackDamage(enemy);
+            var modifier = GetAttackModifier(totalAttackRoll) + RaceBase.GetBonusAttackDamage(enemy);
             var canHit = GetHitChance(enemy, totalAttackRoll, modifier);
 
             if (!canHit)
@@ -226,7 +226,7 @@ namespace EverCraft_Kata.Character
         protected virtual bool GetHitChance(CharacterBaseModel enemy, int totalAttackRoll, int modifier)
         {
             // 100% hit chance at critical hit, otherwise hit must be bigger thane enemy armor
-            return IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass + enemy.Race.BonusArmorClassWhenAttacked(this);
+            return IsCrit(totalAttackRoll) || (totalAttackRoll + modifier) >= enemy.ArmorClass + enemy.RaceBase.BonusArmorClassWhenAttacked(this);
         }
 
         protected virtual int GetAttackModifier(int totalAttackRoll)
@@ -242,7 +242,7 @@ namespace EverCraft_Kata.Character
 
         protected bool IsCrit(int hitRoll)
         {
-            return hitRoll >= 20 - Race.CriticalHitRangeModifier();
+            return hitRoll >= 20 - RaceBase.CriticalHitRangeModifier();
         }
 
         protected void AddExperience(int exp)

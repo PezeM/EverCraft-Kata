@@ -36,10 +36,10 @@ namespace EverCraft_Kata.Equipment.Weapons
 
         private int GetBonusDamageAndAttackRoll(CharacterBaseModel enemy, CharacterBaseModel attacker)
         {
-            if (enemy.Race.GetType() == typeof(Orc) && attacker.Race.GetType() == typeof(Elf))
+            if (enemy.RaceBase.GetType() == typeof(Orc) && attacker.RaceBase.GetType() == typeof(Elf))
                 return 5;
 
-            if (enemy.Race.GetType() == typeof(Orc) || attacker.Race.GetType() == typeof(Elf))
+            if (enemy.RaceBase.GetType() == typeof(Orc) || attacker.RaceBase.GetType() == typeof(Elf))
                 return 2;
 
             return 0;

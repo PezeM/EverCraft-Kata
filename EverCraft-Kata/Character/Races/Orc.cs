@@ -2,20 +2,12 @@
 
 namespace EverCraft_Kata.Character.Races
 {
-    public class Orc : IRace
+    public class Orc : RaceBase
     {
-        public int StrengthModifier { get; } = 2;
-        public int DexterityModifier { get; } = 0;
-        public int ConstitutionModifier { get; } = 0;
-        public int WisdomModifier { get; } = -1;
-        public int IntelligenceModifier { get; } = -1;
-        public int CharismaModifier { get; } = -1;
-        public int ArmorClassBonusModifier { get; } = 2;
-        public int GetBonusHitPoints(CharacterBaseModel character) => 0;
-        public int GetBonusAttackRoll(CharacterBaseModel enemy) => 0;
-        public int GetBonusAttackDamage(CharacterBaseModel enemy) => 0;
-        public int CriticalHitRangeModifier() => 0;
-        public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker) => 0;
-        public List<Alignment> ListOfNotPossibleAlignments => new List<Alignment>();
+        public override int StrengthModifier { get; } = 2;
+        public override int WisdomModifier { get; } = -1;
+        public override int IntelligenceModifier { get; } = -1;
+        public override int CharismaModifier { get; } = -1;
+        public override int ArmorClassBonusModifier { get; } = 2;
     }
 }

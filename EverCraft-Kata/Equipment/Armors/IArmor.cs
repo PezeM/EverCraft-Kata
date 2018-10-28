@@ -16,7 +16,7 @@ namespace EverCraft_Kata.Equipment.Armors
         int DamageReduction { get; }
 
         /// <summary>
-        /// Bonus to attack roll depending on race/class or alignment 
+        /// Bonus to attack roll depending on raceBase/class or alignment 
         /// </summary>
         Func<CharacterBaseModel, int> BonusConditionalAttackRoll { get; }
 

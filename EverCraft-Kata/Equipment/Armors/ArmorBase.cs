@@ -13,7 +13,7 @@ namespace EverCraft_Kata.Equipment.Armors
         public int ArmorClass { get; private set; } = 0;
 
         /// <summary>
-        /// Bonus armor depending on class/race or alignment 
+        /// Bonus armor depending on class/raceBase or alignment 
         /// </summary>
         public Func<CharacterBaseModel, int> BonusConditionalArmor = a => 0;
 
@@ -22,7 +22,7 @@ namespace EverCraft_Kata.Equipment.Armors
         public string Name { get; private set; } = string.Empty;
 
         /// <summary>
-        /// Race/class that can wear this armor, by default everyone can wear this
+        /// RaceBase/class that can wear this armor, by default everyone can wear this
         /// </summary>
         public Func<CharacterBaseModel, bool> CanBeWornBy = w => true;
 
@@ -39,7 +39,7 @@ namespace EverCraft_Kata.Equipment.Armors
             Name = "Plate armor",
             ArmorClass = 8,
             // Can be worn only by fighter or dwarf
-            CanBeWornBy = w => w is Fighter || w.Race.GetType() == typeof(Dwarf) ? true : false
+            CanBeWornBy = w => w is Fighter || w.RaceBase.GetType() == typeof(Dwarf) ? true : false
         };
 
         // Magical leather armor of damage reduction
@@ -53,9 +53,9 @@ namespace EverCraft_Kata.Equipment.Armors
         public static ArmorBase ElvenChainMail = new ArmorBase
         {
             Name = "Elven chain mail",
-            BonusConditionalArmor = a => a.Race.GetType() == typeof(Elf) ? 3 : 0,
+            BonusConditionalArmor = a => a.RaceBase.GetType() == typeof(Elf) ? 3 : 0,
             ArmorClass = 5,
-            BonusConditionalAttackRoll = b => b.Race.GetType() == typeof(Elf) ? 1 : 0
+            BonusConditionalAttackRoll = b => b.RaceBase.GetType() == typeof(Elf) ? 1 : 0
         };
     }
 }

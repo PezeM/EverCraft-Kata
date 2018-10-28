@@ -21,7 +21,7 @@ namespace EverCraft_Kata.Equipment.OtherItems
         public int BonusStrengthScore { get; set; } = 0;
 
         /// <summary>
-        /// Bonus conditional attack depending on class/race/alignment
+        /// Bonus conditional attack depending on class/raceBase/alignment
         /// </summary>
         public Func<CharacterBaseModel, CharacterBaseModel, int> BonusConditionalAttack { get; set; } = (c, e) => 0;
     }

@@ -47,14 +47,14 @@ namespace EverCraft_Kata.Tests
         [TestMethod]
         public void CharacterHasHumanAsStartingRace()
         {
-            Assert.IsInstanceOfType(newCharacter.Race, typeof(Human));
+            Assert.IsInstanceOfType(newCharacter.RaceBase, typeof(Human));
         }
 
         [TestMethod]
         public void CharacterCanChangeRace()
         {
             newCharacter.ChangeRace(new Orc());
-            Assert.IsInstanceOfType(newCharacter.Race, typeof(Orc));
+            Assert.IsInstanceOfType(newCharacter.RaceBase, typeof(Orc));
         }
 
         [TestMethod]

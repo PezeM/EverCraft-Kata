@@ -1,34 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace EverCraft_Kata.Character.Races
 {
-    public class Dwarf : IRace
+    public class Dwarf : RaceBase
     {
-        public int StrengthModifier { get; } = 0;
-        public int DexterityModifier { get; } = 0;
-        public int ConstitutionModifier { get; } = 1;
-        public int WisdomModifier { get; } = 0;
-        public int IntelligenceModifier { get; } = 0;
-        public int CharismaModifier { get; } = -1;
-        public int ArmorClassBonusModifier { get; } = 0;
+        public override int ConstitutionModifier { get; } = 1;
+        public override int CharismaModifier { get; } = -1;
 
-        public int GetBonusHitPoints(CharacterBaseModel character)
+        public override int GetBonusHitPoints(CharacterBaseModel character)
         {
             return Math.Max(0, character.Level * character.ConstitutionModifier);
         }
-        public int GetBonusAttackRoll(CharacterBaseModel enemy)
+
+        public override int GetBonusAttackRoll(CharacterBaseModel enemy)
         {
-            return enemy.Race.GetType() == typeof(Orc) ? 2 : 0;
+            return enemy.RaceBase.GetType() == typeof(Orc) ? 2 : 0;
         }
 
-        public int GetBonusAttackDamage(CharacterBaseModel enemy)
+        public override int GetBonusAttackDamage(CharacterBaseModel enemy)
         {
-            return enemy.Race.GetType() == typeof(Orc) ? 2 : 0;
+            return enemy.RaceBase.GetType() == typeof(Orc) ? 2 : 0;
         }
-        public int CriticalHitRangeModifier() => 0;
-        public int BonusArmorClassWhenAttacked(CharacterBaseModel attacker) => 0;
-        public List<Alignment> ListOfNotPossibleAlignments => new List<Alignment>();
-
     }
 }

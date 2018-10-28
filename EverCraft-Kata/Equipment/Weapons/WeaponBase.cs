@@ -24,7 +24,7 @@ namespace EverCraft_Kata.Equipment.Weapons
         public virtual double GetBonusCriticalHitModifier(CharacterBaseModel character) => 1;
 
         /// <summary>
-        /// Get bonus damage depending on the enemy class/race or attacker race/class
+        /// Get bonus damage depending on the enemy class/raceBase or attacker raceBase/class
         /// </summary>
         /// <param name="enemy">Character to attack</param>
         /// <param name="attacker">Character which is attacking</param>
@@ -32,7 +32,7 @@ namespace EverCraft_Kata.Equipment.Weapons
         public virtual int GetBonusConditionalDamage(CharacterBaseModel enemy, CharacterBaseModel attacker) => 0;
 
         /// <summary>
-        /// Get bonus attack roll depending on the enemy class/race and attacker race/class
+        /// Get bonus attack roll depending on the enemy class/raceBase and attacker raceBase/class
         /// </summary>
         /// <param name="enemy">Character to attack</param>
         /// <param name="attacker">Character which is attacking</param>
